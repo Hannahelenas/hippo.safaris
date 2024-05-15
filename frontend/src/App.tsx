@@ -1,34 +1,49 @@
 import './App.css';
 
-// Testar importer
+// Router configuration
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import TextField from '@mui/material/TextField';
+// Pages
+import Home from './pages/Home';
+import Tours from './pages/Tours';
+
+// Components
 import NavBar from './components/NavBar';
 
+const router = createBrowserRouter([
+    {
+        path: '/',
+        Component: Root,
+        children: [
+            {
+                path: '/',
+                Component: Home
+            },
+            {
+                path: '/tours',
+                Component: Tours
+            }
+        ]
+    }
+]);
 
+function Root() {
+    return (
+        <div className="App">
+            <header>
+                <NavBar />
+            </header>
+            <main>
+                <Outlet />
+            </main>
+        </div>
+    );
+}
 
 function App() {
     return (
         <>
-            <NavBar />
-            <h1>Testar</h1>
-            <TextField
-                required
-                id="outlined-required"
-                label="Required"
-                defaultValue="Hello World"
-            />
-            <div>
-                {/* <IconButton aria-label="cart">
-                <StyledBadge badgeContent={1} color="secondary">
-                    <ShoppingCartIcon
-                        fontSize="medium"
-                        sx={{ color: 'red' }}
-                    />
-                </StyledBadge>
-                </IconButton> */}
-
-            </div>
+            <RouterProvider router={router} />
         </>
     );
 }

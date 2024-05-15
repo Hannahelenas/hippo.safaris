@@ -3,3 +3,20 @@
     margin: 0;
     padding: 0;
 }
+
+/* Links */
+a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.active-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
