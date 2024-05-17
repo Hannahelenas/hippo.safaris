@@ -106,7 +106,7 @@ function NavBar() {
     );
 
     return (
-        <AppBar position="static" elevation={0}>
+        <AppBar position="absolute" elevation={0}  sx={{ backgroundColor: 'transparent' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
