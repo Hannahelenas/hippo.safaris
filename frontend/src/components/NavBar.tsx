@@ -21,8 +21,6 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { NavLink, useMatch } from 'react-router-dom';
 
-/* import Logo2 from 'src/assets/Logo2.png'; */
-
 const pages = [
     {
         component: 'Home',
@@ -126,8 +124,13 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                        <img className="logo" src="Logo.png" alt="logo" />
+                      <img
+                            className="logo"
+                            src="Logo.png"
+                            alt="logo"
+                        />
                     </Typography>
+
                     <Box
                         sx={{
                             flexGrow: 1,
@@ -182,7 +185,7 @@ function NavBar() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href="/"
+                        href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -194,9 +197,12 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                        <img className="logo" src="Logo.png" alt="logo" />
+                        <img
+                            className="logo"
+                            src="Logo.png"
+                            alt="logo"
+                        />
                     </Typography>
-
                     {/* <Box
                         sx={{
                             flexGrow: 1,
@@ -235,11 +241,7 @@ function NavBar() {
                             </StyledBadge>
                         </IconButton> */}
 
-                        <IconButton
-                            aria-label="cart"
-                            component={NavLink}
-                            to="/"
-                        >
+                        <IconButton aria-label="cart" component={NavLink} to="/">
                             <StyledBadge badgeContent={4}>
                                 <ShoppingCartIcon sx={{ color: 'white' }} />
                             </StyledBadge>
