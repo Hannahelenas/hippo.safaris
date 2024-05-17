@@ -2,6 +2,12 @@
     font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
 }
 
+.logo {
+    height: 60px;
+    margin: 0.5rem;
+
+
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -18,6 +18,7 @@
         "@mui/icons-material": "^5.15.17",
         "@mui/material": "^5.15.17",
         "express": "^4.19.2",
+        "path": "^0.12.7",
         "styled-components": "^6.1.11"
     },
     "devDependencies": {
