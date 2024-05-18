@@ -3,8 +3,8 @@ body{
     font-family:'Nunito Sans', 'Roboto', 'Oxygen' !important;
 }
 
-.MuiButtonBase-root .MuiTypography-root {
-    font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
+.MuiButtonBase-root .MuiButton-root .MuiTypography-root {
+    font-family:'Nunito Sans', 'Roboto', 'Oxygen' !important;
 }
 
 .logo {
