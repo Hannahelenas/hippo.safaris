@@ -5,7 +5,7 @@ const Hero = styled.div`
     margin-top: 0;
     height: 90vh;
     width: 100vw;
-    position: absolute;
+    position: relative;
     background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.2) 0%,
@@ -15,7 +15,9 @@ const Hero = styled.div`
     height: 90vh;
     background-size: cover;
     background-position: center;
-    z-index: -1;
+    z-index: 0;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
 `;
 
 const Title = styled.h1`
