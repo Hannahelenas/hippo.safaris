@@ -1,4 +1,5 @@
 import './App.css';
+import styled from 'styled-components';
 
 // Router configuration
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -9,6 +10,8 @@ import Tours from './pages/Tours';
 
 // Components
 import NavBar from './components/NavBar';
+import FooterSection from './components/FooterSection';
+
 
 const router = createBrowserRouter([
     {
@@ -27,16 +30,27 @@ const router = createBrowserRouter([
     }
 ]);
 
+const MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+`;
+
 function Root() {
     return (
-        <div className="App">
+        <MainContainer>
             <header>
                 <NavBar />
             </header>
             <main>
                 <Outlet />
             </main>
-        </div>
+            <footer>
+            <FooterSection />
+            </footer>
+        </MainContainer>
     );
 }
 
