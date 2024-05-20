@@ -13,12 +13,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Button } from '@mui/material';
-
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-
 import { NavLink, useMatch } from 'react-router-dom';
 
 const pages = [
