@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import PrimaryButton from './PrimaryButton';
+import FilterButton from './FilterButton';
 
 const Hero = styled.div`
     margin-top: 0;
-    height: 95vh;
     width: 100vw;
+    height: 95vh;
     position: relative;
     background: linear-gradient(
         90deg,
@@ -12,6 +12,7 @@ const Hero = styled.div`
         rgba(38, 50, 56, 0.7) 100%
     ),
         url('giraffs.jpg');
+
     background-size: cover;
     background-position: center;
     z-index: 0;
@@ -34,15 +35,30 @@ const TitleContainer = styled.div`
     align-items: center;
 `;
 
-const HomeHero = () => {
+const FilterButtonContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+`
+
+
+const ToursHero = () => {
     return (
         <Hero>
             <TitleContainer>
-                <Title>Safaris in Africas most beautiful landscape</Title>
-                <PrimaryButton text={'Book now'} to="/tours"/>
+                <Title>Discover wildlife with our excellent guided tours</Title>
+                <FilterButtonContainer>
+                <FilterButton text={'See all'}/>
+                <FilterButton text={'Classic'}/>
+                <FilterButton text={'Family'}/>
+                <FilterButton text={'Premium'}/>
+                </FilterButtonContainer>
             </TitleContainer>
         </Hero>
     );
 };
 
-export default HomeHero;
+export default ToursHero;
