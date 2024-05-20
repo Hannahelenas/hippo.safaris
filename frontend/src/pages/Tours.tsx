@@ -1,6 +1,9 @@
+import ToursHero from "../components/ToursHero"
+
+
 const Tours = () => {
   return (
-    <div>Tours</div>
+    <div><ToursHero /></div>
   )
 }
 
