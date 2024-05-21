@@ -3,7 +3,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box } from '@mui/material';
 import { styled } from '@mui/system';
-import { NavLink } from 'react-router-dom';
+/* import { NavLink } from 'react-router-dom'; */
 
 interface TourCardProps {
     name: string;
@@ -61,7 +61,7 @@ const Banner = styled('div')({
 
 const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => {
     return (
-        <NavLink to="/tours" style={{ textDecoration: 'none' }}>
+
         <ProductCard
             elevation={0}
             sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}
@@ -92,7 +92,6 @@ const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => 
                 </Box>
             </CardActionArea>
         </ProductCard>
-        </NavLink>
     );
 };
 

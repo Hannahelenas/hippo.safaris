@@ -7,6 +7,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Pages
 import Home from './pages/Home';
 import Tours from './pages/Tours';
+import TourDetails from './pages/TourDetails';
 
 // Components
 import NavBar from './components/NavBar';
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
             {
                 path: '/tours',
                 Component: Tours
-            }
+            },
+            {
+                path: '/tours/:id',
+                Component: TourDetails
+            },
         ]
     }
 ]);

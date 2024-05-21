@@ -57,10 +57,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api', (_request, response) => {
     response.send({ hello: 'World' });
 });
+// Endpoint for all safaris
 app.get('/safaris', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const safaris = yield database.all('SELECT * FROM Safaris');
         res.json(safaris);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
+// Endpoint for one safari
+app.get('/safaris/:safariId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.safariId;
+    try {
+        const safari = yield database.all('SELECT * FROM Safaris WHERE id = ?', [id]);
+        res.json(safari);
     }
     catch (error) {
         console.error(error);
