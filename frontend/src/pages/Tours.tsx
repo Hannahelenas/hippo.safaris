@@ -2,7 +2,9 @@ import ToursHero from '../components/ToursHero';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TourCard from '../components/TourCard';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
 interface Safari {
     id: number;
     name: string;
@@ -43,6 +45,7 @@ const Tours = () => {
             <ToursHero />
             <CardContainer>
                 {safaris.map((safari) => (
+                    <NavLink to={`/tours/${safari.id}`} style={{ textDecoration: 'none' }}>
                     <TourCard
                         key={safari.id}
                         name={safari.name}
@@ -50,6 +53,7 @@ const Tours = () => {
                         image={safari.image}
                         country={safari.country}
                     />
+                    </NavLink>
                 ))}
             </CardContainer>
         </div>

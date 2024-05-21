@@ -33,6 +33,7 @@ app.get('/api', (_request: Request, response: Response) => {
   response.send({ hello: 'World' })
 })
 
+// Endpoint for all safaris
 app.get('/safaris', async (_req: Request, res: Response) => {
     try {
         const safaris = await database.all('SELECT * FROM Safaris');
@@ -44,10 +45,22 @@ app.get('/safaris', async (_req: Request, res: Response) => {
     }
 });
 
+// Endpoint for one safari
+app.get('/safaris/:safariId', async (req: Request, res: Response) => {
+    const id = req.params.safariId
+    try {
+        const safari = await database.all('SELECT * FROM Safaris WHERE id = ?', [id]);
+        res.json(safari);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.get('*', (_request: Request, response: Response) => {
     response.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
