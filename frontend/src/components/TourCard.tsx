@@ -5,11 +5,19 @@ import { CardActionArea, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { NavLink } from 'react-router-dom';
 
+interface TourCardProps {
+    name: string;
+    image: string;
+    price: number;
+    country: string;
+}
+
+
 const ProductCard = styled(Card)({
     maxWidth: 370,
     fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important",
     borderRadius: '5px',
-    margin: '0.5rem'
+    margin: '0.2rem',
 });
 
 const Overlay = styled('div')({
@@ -20,21 +28,20 @@ const Overlay = styled('div')({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     color: 'white',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important"
+    /* backgroundColor: 'rgba(0, 0, 0, 0.3)', */
+    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
 });
 
 const OverlayContent = styled('div')({
+    position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
     color: 'white',
-    marginTop: '10rem',
-    marginLeft: '1.5rem',
-    marginRight: '1.5rem',
+    padding: '1.5rem',
+    marginTop: '18rem',
 
 })
 
@@ -52,32 +59,34 @@ const Banner = styled('div')({
     zIndex: 1,
 });
 
-const TourCard = () => {
+const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => {
     return (
         <NavLink to="/tours" style={{ textDecoration: 'none' }}>
         <ProductCard
             elevation={0}
+            sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}
         >
             <CardActionArea>
                 <Box sx={{ position: 'relative' }}>
                 <Banner>New</Banner>
                     <CardMedia
                         component="img"
-                        height="420"
-                        image="giraffs.jpg"
-                        alt="giraffs"
+                        height="410"
+                        image={image}
+                        alt={name}
                     />
                     <Overlay>
                         <OverlayContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Luxury Wilderness Retreat
+                        <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
+                        {name}
                         </Typography>
-                        <Typography variant="body2" component="div">
-                            5 days
+                        <Typography variant="body2" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
+                        {country}
                         </Typography>
-                        <Typography variant="body2" component="div">
-                            Ulitmate luxury safari experience combined with spa and private guided tours.
+                        <Typography variant="body2" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
+                            {price}
                         </Typography>
+
                         </OverlayContent>
                     </Overlay>
                 </Box>
