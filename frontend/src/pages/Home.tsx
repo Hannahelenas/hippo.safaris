@@ -1,5 +1,5 @@
 import HomeHero from '../components/HomeHero';
-import TourCard from '../components/TourCard';
+/* import TourCard from '../components/TourCard'; */
 import RecommendedToursIntro from '../components/RecommendedToursIntro';
 import styled from "styled-components";
 
@@ -16,9 +16,6 @@ const Home = () => {
             <HomeHero />
             <RecommendedToursIntro />
             <CardContainer>
-            <TourCard />
-            <TourCard />
-            <TourCard />
             </CardContainer>
         </div>
     );
