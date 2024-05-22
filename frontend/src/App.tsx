@@ -13,6 +13,10 @@ import TourDetails from './pages/TourDetails';
 import NavBar from './components/NavBar';
 import FooterSection from './components/FooterSection';
 
+//Date picker 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 const router = createBrowserRouter([
     {
@@ -61,8 +65,9 @@ function Root() {
 
 function App() {
     return (
-        <>
+        <><LocalizationProvider dateAdapter={AdapterDayjs}>
             <RouterProvider router={router} />
+            </LocalizationProvider>
         </>
     );
 }
