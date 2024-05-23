@@ -18,6 +18,8 @@ import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { NavLink, useMatch } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+
 
 const pages = [
     {
@@ -65,6 +67,9 @@ function NavBar() {
         bottom: false,
         right: false
     });
+
+
+    const { cartQuantity } = useCart();
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -239,8 +244,8 @@ function NavBar() {
                             </StyledBadge>
                         </IconButton> */}
 
-                        <IconButton aria-label="cart" component={NavLink} to="/">
-                            <StyledBadge badgeContent={4}>
+                        <IconButton aria-label="cart" component={NavLink} to="/cart">
+                            <StyledBadge badgeContent={cartQuantity}>
                                 <ShoppingCartIcon sx={{ color: 'white' }} />
                             </StyledBadge>
                         </IconButton>
