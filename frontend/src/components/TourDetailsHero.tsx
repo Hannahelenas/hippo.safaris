@@ -12,7 +12,9 @@ const Hero = styled.div<HeroProps>`
     width: 100vw;
     height: 95vh;
     position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 50%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 50%),
         url(${(props) => props.image});
     background-size: cover;
     background-position: center;
@@ -21,34 +23,40 @@ const Hero = styled.div<HeroProps>`
     box-sizing: border-box !important;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     color: white;
-    text-align: center;
-
-    h1 {
-        font-size: 44px;
-        margin: 0;
-        padding: 0;
-    }
 `;
+
+const ContentWrapper = styled.div`
+    margin-top: 77vh;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+`;
+
+const Title = styled.h1`
+    font-size: 44px;
+    margin: 0;
+    padding: 0;
+`;
+
 const InfoWrapper = styled.div`
     display: flex;
     gap: 1rem;
     font-weight: bold;
 
 `;
+
 const TourDetailsHero: React.FC<HeroProps> = (props) => {
     return (
-        <>
-            <Hero {...props}>
-                <h1>{props.name}</h1>
+        <Hero {...props}>
+            <ContentWrapper>
+                <Title>{props.name}</Title>
                 <InfoWrapper>
                     <p>{props.country}</p>
                     <p>{props.category} Safari</p>
                 </InfoWrapper>
-            </Hero>
-        </>
+            </ContentWrapper>
+        </Hero>
     );
 };
 

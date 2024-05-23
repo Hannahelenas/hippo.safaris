@@ -8,14 +8,18 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Tours from './pages/Tours';
 import TourDetails from './pages/TourDetails';
+import Cart from './pages/Cart';
 
 // Components
 import NavBar from './components/NavBar';
 import FooterSection from './components/FooterSection';
 
-//Date picker 
+//Date picker
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+// Cart
+import { CartProvider } from './context/CartContext';
 
 
 const router = createBrowserRouter([
@@ -35,6 +39,10 @@ const router = createBrowserRouter([
                 path: '/tours/:id',
                 Component: TourDetails
             },
+            {
+                path: '/cart',
+                Component: Cart
+            },
         ]
     }
 ]);
@@ -49,6 +57,7 @@ const MainContainer = styled.div`
 
 function Root() {
     return (
+        <CartProvider>
         <MainContainer>
             <header>
                 <NavBar />
@@ -60,6 +69,7 @@ function Root() {
             <FooterSection />
             </footer>
         </MainContainer>
+        </CartProvider>
     );
 }
 

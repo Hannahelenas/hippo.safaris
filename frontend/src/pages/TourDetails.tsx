@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import TourDetailsHero from '../components/TourDetailsHero';
 import styled from 'styled-components';
 import CustomCalendarHeader from '../components/CalendarHeader';
-
+import { Button } from '@mui/material';
+import { useCart } from '../context/CartContext';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import dayjs, { Dayjs } from 'dayjs';
+import { NavLink } from 'react-router-dom';
 
 interface Safari {
     id: number;
@@ -28,6 +30,14 @@ const TourDetails = () => {
 
     console.log('useParams:', useParams());
     console.log(`Fetching data for safariId: ${id}`);
+
+    const {
+        getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        removeFromCart
+    } = useCart();
+    const quantity = id ? getItemQuantity(parseInt(id)) : 0;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -92,7 +102,88 @@ const TourDetails = () => {
                                     ? value.format('YYYY-MM-DD')
                                     : 'No date selected'}
                             </p>
-                            <h3>Participants</h3>
+                            <h3>Select participants</h3>
+                            <div>
+                                {quantity === 0 ? (
+                                    <AddButtonContainer>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        disableElevation
+                                        onClick={() =>
+                                            increaseCartQuantity(
+                                                safari.id,
+                                                safari.name,
+                                                safari.price,
+                                                value
+                                                    ? value.format('YYYY-MM-DD')
+                                                    : today.format('YYYY-MM-DD')
+                                            )
+                                        }
+                                    >
+                                        Add tickets
+                                    </Button>
+                                    </AddButtonContainer>
+                                ) : (
+                                    <div>
+                                        <ParticipantInput>
+                                            <Button
+                                                variant="contained"
+                                                disableElevation
+                                                color="primary"
+                                                onClick={() =>
+                                                    decreaseCartQuantity(
+                                                        safari.id
+                                                    )
+                                                }
+                                            >
+                                                -
+                                            </Button>
+                                            <p>{quantity}</p>
+                                            <Button
+                                                variant="contained"
+                                                disableElevation
+                                                color="primary"
+                                                onClick={() =>
+                                                    increaseCartQuantity(
+                                                        safari.id,
+                                                        safari.name,
+                                                        safari.price,
+                                                        value
+                                                            ? value.format(
+                                                                  'YYYY-MM-DD'
+                                                              )
+                                                            : today.format(
+                                                                  'YYYY-MM-DD'
+                                                              )
+                                                    )
+                                                }
+                                            >
+                                                +
+                                            </Button>
+                                        </ParticipantInput>
+                                        <BottomButtonContainer>
+                                        <Button
+                                            variant="outlined"
+                                            disableElevation
+                                            color="error"
+                                            onClick={() =>
+                                                removeFromCart(safari.id)
+                                            }
+                                        >
+                                            Remove
+                                        </Button>
+                                        <Button
+                                            variant="outlined"
+                                            disableElevation
+                                            component={NavLink} to="/cart"
+                                        >
+                                            Continue
+                                        </Button>
+                                        </BottomButtonContainer>
+                                    </div>
+                                )}
+                            </div>
                         </BookingWrapper>
                     </TourInfoWrapper>
                 </div>
@@ -119,12 +210,13 @@ const PageIntro = styled.div`
 
 const BookingWrapper = styled.div`
     background-color: rgba(240, 240, 240, 1);
-    height: 70vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 30vw;
+    margin-bottom: 1rem;
 
     @media (max-width: 768px) {
         width: 100vw;
@@ -136,4 +228,21 @@ const TourInfoWrapper = styled.div`
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+
 `;
+
+const AddButtonContainer = styled.div`
+display: flex;
+flex-driection: row;
+margin-bottom: 1rem;`
+
+const ParticipantInput = styled.div`
+display: flex;
+flex-driection: row;
+gap: 1rem;
+align-items: baseline;
+margin: 1rem;`
+
+const BottomButtonContainer = styled.div`
+display: flex;
+flex-driection: row;`

@@ -6,11 +6,12 @@ const Hero = styled.div`
     height: 95vh;
     width: 100vw;
     position: relative;
-    background: linear-gradient(
+    background: /* linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.2) 0%,
         rgba(38, 50, 56, 0.7) 100%
-    ),
+    ), */
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)),
         url('giraffs.jpg');
     background-size: cover;
     background-position: center;
