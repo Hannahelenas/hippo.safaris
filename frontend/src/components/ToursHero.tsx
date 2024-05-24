@@ -7,10 +7,12 @@ const Hero = styled.div`
     height: 95vh;
     position: relative;
     background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(38, 50, 56, 0.7) 100%
-    ),
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0)
+        ),
         url('giraffs.jpg');
 
     background-size: cover;
@@ -36,14 +38,13 @@ const TitleContainer = styled.div`
 `;
 
 const FilterButtonContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-gap: 1rem;
-`
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+`;
 
 const ToursHero = () => {
     return (
@@ -51,10 +52,10 @@ const ToursHero = () => {
             <TitleContainer>
                 <Title>Discover wildlife with our excellent guided tours</Title>
                 <FilterButtonContainer>
-                <FilterButton text={'See all'}/>
-                <FilterButton text={'Classic'}/>
-                <FilterButton text={'Family'}/>
-                <FilterButton text={'Premium'}/>
+                    <FilterButton text={'See all'} />
+                    <FilterButton text={'Classic'} />
+                    <FilterButton text={'Family'} />
+                    <FilterButton text={'Premium'} />
                 </FilterButtonContainer>
             </TitleContainer>
         </Hero>

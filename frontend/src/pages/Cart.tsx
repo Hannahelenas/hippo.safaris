@@ -3,6 +3,7 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Button,  IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { NavLink } from 'react-router-dom';
 
 /* import { NavLink } from 'react-router-dom';  */
 
@@ -24,7 +25,7 @@ const Cart: React.FC = () => {
             <Background>
                 <CartWrapper>
                     <CartItems>
-                        <h3>Your cart</h3>
+                        <h2>Your cart</h2>
                         {cartQuantity ? (
                             <ul>
                                 {cartItems.map((item) => (
@@ -60,7 +61,7 @@ const Cart: React.FC = () => {
                                                 Total:
                                                 {item.price * item.quantity}$
                                             </p>
-                                            <ButtonGroup>
+                                            {/* <ButtonGroup>
                                                 <Button
                                                     variant="contained"
                                                     disableElevation
@@ -90,7 +91,7 @@ const Cart: React.FC = () => {
                                                 >
                                                     +
                                                 </Button>
-                                            </ButtonGroup>
+                                            </ButtonGroup> */}
                                         </ItemDetails>
                                         <RemoveButtonContainer>
                                            {/*  <Button
@@ -125,14 +126,14 @@ const Cart: React.FC = () => {
                        <CartSummary>
                             {/* <h3>Total</h3>
                             <p>{totalCost}</p> */}
-                            <h3>Total</h3>
+                            <h2>Total</h2>
                             <p>{totalCost}</p>
                             <ButtonContainer>
                                 <Button
                                     variant="contained"
                                     disableElevation
                                     color="primary"
-                                    onClick={() => alert('Proceed to Checkout')}
+                                    component={NavLink} to="/checkout"
                                 >
                                     Checkout
                                 </Button>
@@ -164,8 +165,8 @@ const Background = styled.div`
 `;
 
 const CartWrapper = styled.div`
-    background-color: lightgrey;
-    width: 80vw;
+    background-color: rgba(240, 240, 240, 1);
+    width: 100vw;
     margin-top: 11vh;
     display: flex;
     justify-content: space-between;
@@ -175,24 +176,26 @@ const CartWrapper = styled.div`
     margin-bottom: 1rem;
 
     @media (max-width: 768px) {
-        width: 90vw;
+        width: 100vw;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        padding: 5px;
+        /* padding: 5px; */
     }
 `;
 
 const CartItems = styled.div`
     background-color: rgba(255, 255, 255, 1);
-    width: 45vw;
-    h3,
+    width: 50vw;
+    margin-left: 3rem;
+    h2,
     p {
         margin: 1rem;
     }
 
     @media (max-width: 768px) {
         width: 90vw;
+        margin-left: 0;
         margin-bottom: 1rem;
     }
 `;
@@ -238,13 +241,15 @@ const RemoveButtonContainer = styled.div`
 const CartSummary = styled.div`
     background-color: rgba(255, 255, 255, 1);
     width: 30vw;
-    h3,
+    margin-right: 3rem;
+    h2,
     p {
         margin: 1rem;
     }
 
     @media (max-width: 768px) {
         width: 90vw;
+        margin: 0;
     }
 `;
 
