@@ -38,8 +38,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sqlite = __importStar(require("sqlite"));
 const sqlite3_1 = __importDefault(require("sqlite3"));
 const cors_1 = __importDefault(require("cors"));
-const bodyParser = require('body-parser');
-const express = require('express'), path = require('path');
+const path_1 = __importDefault(require("path"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const express_1 = __importDefault(require("express"));
 let database;
 (() => __awaiter(void 0, void 0, void 0, function* () {
     database = yield sqlite.open({
@@ -49,11 +50,11 @@ let database;
     yield database.run('PRAGMA foreign_keys = ON');
     console.log('Redo att göra databasanrop');
 }))();
-const app = express();
-app.use(express.static(path.join(path.resolve(), 'dist')));
+const app = (0, express_1.default)();
+app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), 'dist')));
 app.use((0, cors_1.default)());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.get('/api', (_request, response) => {
     response.send({ hello: 'World' });
 });
@@ -81,8 +82,37 @@ app.get('/safaris/:safariId', (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 }));
 app.get('*', (_request, response) => {
-    response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    response.sendFile(path_1.default.join(__dirname, 'dist', 'index.html'));
 });
+// Endpoint for posting order
+app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Extract data from post request
+        const { email, lastName, name, phone, totalCost, products } = req.body;
+        // Add new order to database
+        const result = yield database.run(`
+            INSERT INTO orders (email, last_name, name, phone, total_cost)
+            VALUES (?, ?, ?, ?, ?)
+        `, [email, lastName, name, phone, totalCost]);
+        // Get the latest orderid 
+        const orderId = result.lastID;
+        // Add products to the order details table
+        for (const product of products) {
+            yield database.run(`
+                INSERT INTO order_details (order_id, product_name, quantity, start_date )
+                VALUES (?, ?, ?, ?)
+            `, [orderId, product.name, product.quantity, product.date]);
+        }
+        res.status(201).json({
+            message: 'Order created successfully',
+            orderId
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servern lyssnar på port ${PORT}`);
