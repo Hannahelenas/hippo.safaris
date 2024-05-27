@@ -7,9 +7,11 @@ import styled from 'styled-components';
 import CustomCalendarHeader from '../components/CalendarHeader';
 import { Button } from '@mui/material';
 import { useCart } from '../context/CartContext';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+/* import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'; */
+import { StaticDatePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 import { NavLink } from 'react-router-dom';
+
 
 interface Safari {
     id: number;
@@ -85,44 +87,70 @@ const TourDetails = () => {
                             <p>{safari.category}</p>
                         </PageIntro>
                         <BookingWrapper>
-                            <h2>Buy tickes</h2>
-                            <h3>Select date of travel start</h3>
-                            <DateCalendar
-                                value={value}
-                                onChange={(newValue: Dayjs | null) =>
-                                    setValue(newValue)
-                                }
-                                defaultValue={today}
-                                disablePast
-                                slots={{ calendarHeader: CustomCalendarHeader }}
-                            />
-                            <p>
-                                Travel start:{' '}
-                                {value
-                                    ? value.format('YYYY-MM-DD')
-                                    : 'No date selected'}
-                            </p>
-                            <h3>Select participants</h3>
+                        <ShadowDiv>
+                            <p className="paragraph">Date of travel start</p>
+                            <InnerShadowDiv>
+                                <StyledStaticDatePicker
+                                    value={value}
+                                    onChange={(newValue: Dayjs | null) =>
+                                        setValue(newValue)
+                                    }
+                                    defaultValue={today}
+                                    disablePast
+                                    slots={{
+                                        calendarHeader: CustomCalendarHeader
+                                    }}
+                                    slotProps={{
+                                        toolbar: { hidden: true },
+                                        actionBar: {
+                                            actions: []
+                                        }
+                                    }}
+                                />
+                            </InnerShadowDiv>
+                            <SelectedDateContainer>
+                                <p>
+                                    Travel start:{' '}
+                                    {value
+                                        ? value.format('YYYY-MM-DD')
+                                        : 'No date selected'}
+                                </p>
+                            </SelectedDateContainer>
+                            {/* Buttons start */}
                             <div>
                                 {quantity === 0 ? (
                                     <AddButtonContainer>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        disableElevation
-                                        onClick={() =>
-                                            increaseCartQuantity(
-                                                safari.id,
-                                                safari.name,
-                                                safari.price,
-                                                value
-                                                    ? value.format('YYYY-MM-DD')
-                                                    : today.format('YYYY-MM-DD')
-                                            )
-                                        }
-                                    >
-                                        Add tickets
-                                    </Button>
+                                        {/* <h3>Select participants</h3> */}
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                backgroundColor:
+                                                    '#BF7862',
+                                                color: 'white',
+                                                '&:hover': {
+                                                    backgroundColor:
+                                                        '#BF7862'
+                                                }
+                                            }}
+                                            fullWidth
+                                            disableElevation
+                                            onClick={() =>
+                                                increaseCartQuantity(
+                                                    safari.id,
+                                                    safari.name,
+                                                    safari.price,
+                                                    value
+                                                        ? value.format(
+                                                              'YYYY-MM-DD'
+                                                          )
+                                                        : today.format(
+                                                              'YYYY-MM-DD'
+                                                          )
+                                                )
+                                            }
+                                        >
+                                            Add tickets
+                                        </Button>
                                     </AddButtonContainer>
                                 ) : (
                                     <div>
@@ -130,7 +158,14 @@ const TourDetails = () => {
                                             <Button
                                                 variant="contained"
                                                 disableElevation
-                                                color="primary"
+                                                sx={{
+                                                    backgroundColor: 'white',
+                                                    color: 'black',
+                                                    '&:hover': {
+                                                        backgroundColor:
+                                                            'rgba(0, 0, 0, 0.08)'
+                                                    }
+                                                }}
                                                 onClick={() =>
                                                     decreaseCartQuantity(
                                                         safari.id
@@ -139,11 +174,18 @@ const TourDetails = () => {
                                             >
                                                 -
                                             </Button>
-                                            <p>{quantity}</p>
+                                            <p>{quantity} tickets</p>
                                             <Button
                                                 variant="contained"
                                                 disableElevation
-                                                color="primary"
+                                                sx={{
+                                                    backgroundColor: 'white',
+                                                    color: 'black',
+                                                    '&:hover': {
+                                                        backgroundColor:
+                                                            'rgba(0, 0, 0, 0.08)'
+                                                    }
+                                                }}
                                                 onClick={() =>
                                                     increaseCartQuantity(
                                                         safari.id,
@@ -163,28 +205,31 @@ const TourDetails = () => {
                                             </Button>
                                         </ParticipantInput>
                                         <BottomButtonContainer>
-                                        <Button
-                                            variant="outlined"
-                                            disableElevation
-                                            color="error"
-                                            onClick={() =>
-                                                removeFromCart(safari.id)
-                                            }
-                                        >
-                                            Remove
-                                        </Button>
-                                        <Button
-                                            variant="outlined"
-                                            disableElevation
-                                            component={NavLink} to="/cart"
-                                        >
-                                            Continue
-                                        </Button>
+                                            <Button
+                                                variant="contained"
+                                                disableElevation
+                                                color="error"
+                                                onClick={() =>
+                                                    removeFromCart(safari.id)
+                                                }
+                                            >
+                                                Remove
+                                            </Button>
+                                            <Button
+                                                variant="contained"
+                                                disableElevation
+                                                component={NavLink}
+                                                to="/cart"
+                                            >
+                                                Continue
+                                            </Button>
                                         </BottomButtonContainer>
                                     </div>
                                 )}
                             </div>
+                        </ShadowDiv>
                         </BookingWrapper>
+
                     </TourInfoWrapper>
                 </div>
             ) : (
@@ -209,7 +254,7 @@ const PageIntro = styled.div`
 `;
 
 const BookingWrapper = styled.div`
-    background-color: rgba(240, 240, 240, 1);
+    background-color: 'white';
     height: auto;
     display: flex;
     flex-direction: column;
@@ -228,21 +273,110 @@ const TourInfoWrapper = styled.div`
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-
 `;
 
 const AddButtonContainer = styled.div`
-display: flex;
-flex-driection: row;
-margin-bottom: 1rem;`
+    display: flex;
+    flex-driection: row;
+    margin-bottom: 0.3rem;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+`;
 
 const ParticipantInput = styled.div`
-display: flex;
-flex-driection: row;
-gap: 1rem;
-align-items: baseline;
-margin: 1rem;`
+    display: flex;
+    flex-driection: row;
+    gap: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-block: 1rem;
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+`;
 
 const BottomButtonContainer = styled.div`
-display: flex;
-flex-driection: row;`
+    display: flex;
+    flex-driection: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+`;
+
+const StyledStaticDatePicker = styled(StaticDatePicker)({
+    '.MuiDateCalendar-root': {
+        color: '#ad1457' /* Färgen på månaden i menyn */,
+        borderRadius: '5px',
+        /* borderWidth: '1px', */
+        backgroundColor: 'rgba(240, 240, 240, 1)'
+        /* boxShadow: '0px 0px 19px 0px rgba(0, 0, 0, 0.1)', */
+        /*  marginTop: '0.3rem', */
+        /*  borderColor: '#2196f3', */
+        /* border: '1px solid' */
+    },
+    '.MuiPickersDay-root': {
+        color: 'black',
+        borderRadius: '1px',
+        backgroundColor: 'white'
+    },
+    '.MuiPickersDay-root:hover': {
+        color: 'black',
+        borderRadius: '1px',
+        backgroundColor: 'rgba(240, 240, 240, 1)'
+    },
+    '.MuiPickersDay-today': {
+        color: 'black',
+        borderRadius: '1px',
+        backgroundColor: 'rgba(249, 249, 239, 1)',
+        border: 'none !important'
+    },
+    '.MuiPickersDay-root.Mui-selected': {
+        backgroundColor: '#132813',
+        color: 'white'
+    },
+    '.MuiPickersDay-root.Mui-selected:hover': {
+        backgroundColor: '#132813',
+        color: 'white',
+        borderRadius: '1px'
+    },
+    '.MuiPickersDay-root.Mui-selected:focus': {
+        backgroundColor: '#132813',
+        color: 'white'
+    },
+    '.MuiPickersDay-root.Mui-selected:active': {
+        backgroundColor: '#132813',
+        color: 'white'
+    }
+});
+
+const SelectedDateContainer = styled.div`
+    background-color: 'rgba(240, 240, 240, 1)' /* rgba(245, 246, 248, 1) */;
+    width: 23vw;
+    border-radius: 5px;
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    p {
+        margin-left: 0.5rem;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
+
+const ShadowDiv = styled.div`
+    padding: 1rem;
+    margin: 1rem;
+    background-color: 'white';
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+    .paragraph {
+        margin-bottom: 1rem;
+      }
+`;
+const InnerShadowDiv = styled.div`
+    /*  margin: 0.5rem; */
+    background-color: 'white';
+    box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+`;
