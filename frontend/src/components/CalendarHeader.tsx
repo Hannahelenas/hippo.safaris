@@ -11,43 +11,95 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import { PickersCalendarHeaderProps } from '@mui/x-date-pickers/PickersCalendarHeader';
 
 const CustomCalendarHeaderRoot = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '8px 16px',
-  alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '8px 16px',
+    alignItems: 'center',
+    backgroundColor: 'white'
+    /* borderColor: '#2196f3',
+  border: '1px solid', */
+    /*  borderRadius: '5px', */
+});
+
+const StyledIconButton = styled(IconButton)({
+    '& .MuiSvgIcon-root': {
+        fontSize: '1.25rem',
+      },
+      '&:hover': {
+        backgroundColor: 'white !important',
+      },
+      '&:active': {
+        backgroundColor: 'white !important',
+      },
+      '&:focus': {
+        backgroundColor: 'white !important',
+      },
+      '&.Mui-focusVisible': {
+        backgroundColor: 'white !important',
+      },
+      '&.MuiIconButton-root:focus': {
+        backgroundColor: 'white !important',
+      },
+      '&.MuiIconButton-root:active': {
+        backgroundColor: 'white !important',
+      },
+      '& .MuiTouchRipple-root': {
+        color: 'white !important',
+      }
+
 });
 
 function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
-  const { currentMonth, onMonthChange } = props;
+    const { currentMonth, onMonthChange } = props;
 
-  const selectNextMonth = () => onMonthChange(currentMonth.add(1, 'month'), 'left');
-  const selectNextYear = () => onMonthChange(currentMonth.add(1, 'year'), 'left');
-  const selectPreviousMonth = () =>
-    onMonthChange(currentMonth.subtract(1, 'month'), 'right');
-  const selectPreviousYear = () =>
-    onMonthChange(currentMonth.subtract(1, 'year'), 'right');
+    const selectNextMonth = () =>
+        onMonthChange(currentMonth.add(1, 'month'), 'left');
+    const selectNextYear = () =>
+        onMonthChange(currentMonth.add(1, 'year'), 'left');
+    const selectPreviousMonth = () =>
+        onMonthChange(currentMonth.subtract(1, 'month'), 'right');
+    const selectPreviousYear = () =>
+        onMonthChange(currentMonth.subtract(1, 'year'), 'right');
 
-  return (
-    <CustomCalendarHeaderRoot>
-      <Stack spacing={1} direction="row">
-        <IconButton onClick={selectPreviousYear} title="Previous year">
-          <KeyboardDoubleArrowLeftIcon />
-        </IconButton>
-        <IconButton onClick={selectPreviousMonth} title="Previous month">
-          <ChevronLeft />
-        </IconButton>
-      </Stack>
-      <Typography variant="body2">{currentMonth.format('MMMM YYYY')}</Typography>
-      <Stack spacing={1} direction="row">
-        <IconButton onClick={selectNextMonth} title="Next month">
-          <ChevronRight />
-        </IconButton>
-        <IconButton onClick={selectNextYear} title="Next year">
-          <KeyboardDoubleArrowRightIcon />
-        </IconButton>
-      </Stack>
-    </CustomCalendarHeaderRoot>
-  );
+    return (
+        <CustomCalendarHeaderRoot>
+            <Stack spacing={1} direction="row">
+                <StyledIconButton
+                    onClick={selectPreviousYear}
+                    title="Previous year"
+                    size="small"
+                >
+                    <KeyboardDoubleArrowLeftIcon />
+                </StyledIconButton>
+                <StyledIconButton
+                    onClick={selectPreviousMonth}
+                    title="Previous month"
+                    size="small"
+                >
+                    <ChevronLeft />
+                </StyledIconButton>
+            </Stack>
+            <Typography variant="body2">
+                {currentMonth.format('MMMM YYYY')}
+            </Typography>
+            <Stack spacing={1} direction="row">
+                <StyledIconButton
+                    onClick={selectNextMonth}
+                    title="Next month"
+                    size="small"
+                >
+                    <ChevronRight />
+                </StyledIconButton>
+                <StyledIconButton
+                    onClick={selectNextYear}
+                    title="Next year"
+                    size="small"
+                >
+                    <KeyboardDoubleArrowRightIcon />
+                </StyledIconButton>
+            </Stack>
+        </CustomCalendarHeaderRoot>
+    );
 }
 
-export default CustomCalendarHeader
+export default CustomCalendarHeader;
