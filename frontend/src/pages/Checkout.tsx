@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import { useCart } from '../context/CartContext';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import axios from 'axios';
+
+interface ErrorTextProps {
+    visible: boolean;
+}
 
 const Checkout = () => {
     const { cartQuantity, cartItems } = useCart();
@@ -62,173 +66,276 @@ const Checkout = () => {
     });
 
     return (
-        <Wrapper>
-            <CheckoutTitle>Checkout</CheckoutTitle>
-            <ContentWrapper>
+        <Background>
+            <CheckoutWrapper>
                 <OrderSummary>
                     <h2>Order summary</h2>
                     {cartQuantity ? (
                         <div>
                             {cartItems.map((item) => (
                                 <div key={item.id}>
-                                    <p>
-                                        {item.name} - {item.price} - Tickets:{' '}
-                                        {item.quantity} Total:{' '}
-                                        {item.price * item.quantity}
-                                        {item.date}
-                                    </p>
+                                    <p>Tour: {item.name}</p>
+                                    <p>Price: {item.price}</p>
+                                    <p>Tickets: {item.quantity}</p>
+                                    <p>Total: {item.price * item.quantity}</p>
+                                    <p>Travel start date: {item.date}</p>
                                 </div>
                             ))}
+                            <p>Order total: {totalCost}</p>
                         </div>
                     ) : (
-                        <p>Din varukorg är tom.</p>
+                        <p>No summary to show.</p>
                     )}
-                    <p>Total: {totalCost}</p>
 
                 </OrderSummary>
                 <FormWrapper>
-                <h2>Contact details</h2>
+                    <h2>Contact details</h2>
                     <Form onSubmit={formik.handleSubmit}>
-                        <TextField
+                        <StyledInput
                             id="email"
                             name="email"
-                            label="Email"
+                            placeholder="Email"
                             type="email"
-                            required
-                            fullWidth
-                            margin="normal"
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={
-                                formik.touched.email &&
-                                Boolean(formik.errors.email)
-                            }
-                            helperText={
-                                formik.touched.email && formik.errors.email
-                            }
                         />
-                        <TextField
+                        {formik.touched.email && formik.errors.email && (
+                            <ErrorText
+                                visible={
+                                    !!(
+                                        formik.touched.email &&
+                                        formik.errors.email
+                                    )
+                                }
+                            >
+                                {formik.errors.email}
+                            </ErrorText>
+                        )}
+                        <StyledInput
                             id="name"
                             name="name"
-                            label="Name"
+                            placeholder="Name"
                             type="text"
-                            required
-                            fullWidth
-                            margin="normal"
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={
-                                formik.touched.name &&
-                                Boolean(formik.errors.name)
-                            }
-                            helperText={
-                                formik.touched.name && formik.errors.name
-                            }
                         />
-                        <TextField
-                            id="lastName"
+                        {formik.touched.name && formik.errors.name && (
+                            <ErrorText
+                                visible={
+                                    !!(
+                                        formik.touched.name &&
+                                        formik.errors.name
+                                    )
+                                }
+                            >
+                                {formik.errors.name}
+                            </ErrorText>
+                        )}
+                        <StyledInput
+                            id="lastname"
                             name="lastName"
-                            label="Last Name"
                             type="text"
-                            required
-                            fullWidth
-                            margin="normal"
+                            placeholder="Lastname"
                             value={formik.values.lastName}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={
-                                formik.touched.lastName &&
-                                Boolean(formik.errors.lastName)
-                            }
-                            helperText={
-                                formik.touched.lastName &&
-                                formik.errors.lastName
-                            }
                         />
-                        <TextField
+                        {formik.touched.lastName && formik.errors.lastName && (
+                            <ErrorText
+                                visible={
+                                    !!(
+                                        formik.touched.lastName &&
+                                        formik.errors.lastName
+                                    )
+                                }
+                            >
+                                {formik.errors.lastName}
+                            </ErrorText>
+                        )}
+
+                        <StyledInput
                             id="phone"
                             name="phone"
-                            label="Phone"
+                            placeholder="Phone"
                             type="tel"
-                            required
-                            fullWidth
-                            margin="normal"
                             value={formik.values.phone}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={
-                                formik.touched.phone &&
-                                Boolean(formik.errors.phone)
-                            }
-                            helperText={
-                                formik.touched.phone && formik.errors.phone
-                            }
                         />
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            disableElevation
-                            type="submit"
-                            style={{ marginTop: '1rem' }}
-                        >
-                            Place Order
-                        </Button>
+                        {formik.touched.phone && formik.errors.phone && (
+                            <ErrorText
+                                visible={
+                                    !!(
+                                        formik.touched.phone &&
+                                        formik.errors.phone
+                                    )
+                                }
+                            >
+                                {formik.errors.phone}
+                            </ErrorText>
+                        )}
+                        <ButtonWrapper>
+                            <StyledButton
+                                type="submit"
+                                variant="contained"
+                                disableElevation
+                                disabled={!formik.isValid || !formik.dirty}
+                            >
+                                Place Order
+                            </StyledButton>
+                        </ButtonWrapper>
                     </Form>
                 </FormWrapper>
-            </ContentWrapper>
-        </Wrapper>
+            </CheckoutWrapper>
+        </Background>
     );
 };
 
 export default Checkout;
 
-const Wrapper = styled.div`
-    margin-top: 5rem;
-    background-color: rgba(240, 240, 240, 1);
-`;
-
-const CheckoutTitle = styled.h1`
-    margin-left: 5rem;
-
+const Background = styled.div`
+    margin-top: 0;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0)
+        ),
+        url('giraffs.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    display: flex;
+    justify-content: center;
     @media (max-width: 768px) {
-        margin-left: 0;
+        height: auto;
     }
 `;
 
-const ContentWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 5rem;
+const CheckoutWrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 10vh;
+    padding: 20px;
 
     @media (max-width: 768px) {
-        flex-direction: column;
-        margin: 1rem;
+        margin-top: 7vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 2px;
     }
 `;
 
 const OrderSummary = styled.div`
-    flex: 1;
-    margin-right: 2rem;
-    margin-bottom: auto;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 40vw;
+    height: 70vh;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    h2,
+    p {
+        margin: 1rem;
+    }
+
     @media (max-width: 768px) {
-        margin-right: 0;
-        margin-bottom: 2rem;
+        width: 90vw;
+        margin-left: 0;
+        margin-bottom: 1rem;
+        height: auto;
     }
 `;
 
 const FormWrapper = styled.div`
-    flex: 1;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 40vw;
+    height: 70vh;
+    margin-right: 4rem;
     margin-bottom: 1rem;
+    h2,
+    p {
+        margin: 1rem;
+    }
+
     @media (max-width: 768px) {
-        margin-top: 2rem;
+        width: 90vw;
+        margin: 0;
+        height: auto;
     }
 `;
 
 const Form = styled.form`
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+`;
 
+const StyledInput = styled.input`
+    width: auto;
+    height: 40px;
+    border: none;
+    margin: 0.5rem;
+    padding: 8px;
+    background-color: #f9f6f3;
+    box-sizing: border-box;
+    /*  border-radius: 4px; */
+    outline: none;
+
+    &:focus {
+        border: 1px solid #c02b0a;
+        /* box-shadow: 0 0 5px #C02B0A; */
+    }
+
+    /* WebKit specific styles for autofill */
+    &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px #f9f6f3 inset !important;
+        -webkit-text-fill-color: black !important;
+    }
+
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #f9f6f3 inset !important;
+        -webkit-text-fill-color: black !important;
+    }
+`;
+
+const ErrorText = styled.div<ErrorTextProps>`
+    color: #c02b0a;
+    font-size: 0.875em;
+    margin-left: 0.5rem;
+
+    visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+`;
+
+const ButtonWrapper = styled.div`
+    align-self: flex-end;
+    margin-top: 1rem;
+    margin: 0.5rem;
+    margin-bottom: 1rem;
+`;
+
+const StyledButton = styled(Button)`
+    background-color: rgba(19, 40, 19, 1) !important;
+    color: white !important;
+    padding: 0.8rem 2.5rem !important;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
+    text-transform: none !important;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: rgba(19, 40, 19, 0.9) !important;
+        text-decoration: none !important;
+    }
 `;
