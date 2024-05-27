@@ -3,7 +3,7 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Button,  IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /* import { NavLink } from 'react-router-dom';  */
 
@@ -61,50 +61,9 @@ const Cart: React.FC = () => {
                                                 Total:
                                                 {item.price * item.quantity}$
                                             </p>
-                                            {/* <ButtonGroup>
-                                                <Button
-                                                    variant="contained"
-                                                    disableElevation
-                                                    color="primary"
-                                                    size="small"
-                                                    onClick={() =>
-                                                        decreaseCartQuantity(
-                                                            item.id
-                                                        )
-                                                    }
-                                                >
-                                                    -
-                                                </Button>
-                                                <Button
-                                                    variant="contained"
-                                                    disableElevation
-                                                    color="primary"
-                                                    size="small"
-                                                    onClick={() =>
-                                                        increaseCartQuantity(
-                                                            item.id,
-                                                            item.name,
-                                                            item.price,
-                                                            item.date
-                                                        )
-                                                    }
-                                                >
-                                                    +
-                                                </Button>
-                                            </ButtonGroup> */}
+
                                         </ItemDetails>
                                         <RemoveButtonContainer>
-                                           {/*  <Button
-                                                variant="outlined"
-                                                disableElevation
-                                                color="inherit"
-                                                startIcon={<CloseIcon />}
-                                                onClick={() =>
-                                                    removeFromCart(item.id)
-                                                }
-                                            >
-                                                Remove
-                                            </Button> */}
                                             <IconButton
                                                 aria-label="delete"
                                                 color="inherit"
@@ -129,14 +88,14 @@ const Cart: React.FC = () => {
                             <h2>Total</h2>
                             <p>{totalCost}</p>
                             <ButtonContainer>
-                                <Button
+                                <StyledButton
                                     variant="contained"
                                     disableElevation
-                                    color="primary"
-                                    component={NavLink} to="/checkout"
+                                    as={Link}
+                                     to="/checkout"
                                 >
                                     Checkout
-                                </Button>
+                                </StyledButton>
                             </ButtonContainer>
                         </CartSummary>
                     )}
@@ -151,10 +110,11 @@ export default Cart;
 
 const Background = styled.div`
     margin-top: 0;
-    height: auto;
+    height: 90vh;
     width: 100vw;
     position: relative;
-    background: grey;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)),
+    url('giraffs.jpg');
     background-size: cover;
     background-position: center;
     z-index: 0;
@@ -165,9 +125,9 @@ const Background = styled.div`
 `;
 
 const CartWrapper = styled.div`
-    background-color: rgba(240, 240, 240, 1);
+    background-color: rgba(240, 240, 240, 0.0);
     width: 100vw;
-    margin-top: 11vh;
+    margin-top: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -185,7 +145,7 @@ const CartWrapper = styled.div`
 `;
 
 const CartItems = styled.div`
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 50vw;
     margin-left: 3rem;
     h2,
@@ -239,9 +199,9 @@ const RemoveButtonContainer = styled.div`
 `;
 
 const CartSummary = styled.div`
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 30vw;
-    margin-right: 3rem;
+    margin-right: 4rem;
     h2,
     p {
         margin: 1rem;
@@ -256,12 +216,32 @@ const CartSummary = styled.div`
 const ButtonContainer = styled.div`
     margin-top: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     /* padding: 1rem; */
     margin-bottom: 1rem;
+    margin-right: 1rem;
 
     @media (max-width: 768px) {
         width: 100%;
     }
+`;
+
+const StyledButton = styled(Button)`
+    background-color: rgba(19, 40, 19, 1) !important;
+    color: white !important;
+    padding: 0.8rem 2.5rem !important;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
+    text-transform: none !important;
+    border-radius: 5px;
+    margin: 0;
+
+    &:hover {
+        background-color: rgba(19, 40, 19, 0.9) !important;
+        text-decoration: none !important;
+    }
+    @media (max-width: 768px) {
+        margin-right: 1rem;
+      }
 `;
