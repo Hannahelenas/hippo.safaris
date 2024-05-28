@@ -81,6 +81,18 @@ app.get('/safaris/:safariId', (req, res) => __awaiter(void 0, void 0, void 0, fu
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
+//Endpoint for classic safaris
+app.get('/classic', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = 'Classic';
+    try {
+        const classicSafaris = yield database.all('SELECT * FROM Safaris WHERE category = ?', [category]);
+        res.json(classicSafaris);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
 app.get('*', (_request, response) => {
     response.sendFile(path_1.default.join(__dirname, 'dist', 'index.html'));
 });
@@ -94,7 +106,7 @@ app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             INSERT INTO orders (email, last_name, name, phone, total_cost)
             VALUES (?, ?, ?, ?, ?)
         `, [email, lastName, name, phone, totalCost]);
-        // Get the latest orderid 
+        // Get the latest orderid
         const orderId = result.lastID;
         // Add products to the order details table
         for (const product of products) {

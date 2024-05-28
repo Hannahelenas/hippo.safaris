@@ -12,6 +12,8 @@ type CartContext = {
     removeFromCart: (id: number) => void;
     cartQuantity: number;
     cartItems: CartItem[];
+    clearCart: () => void;
+
 };
 
 type CartItem = {
@@ -75,6 +77,10 @@ export function CartProvider({ children }: CartProviderProps) {
             return currItems.filter((item) => item.id !== id);
         });
     }
+    function clearCart() {
+        setCartItems([]);
+    }
+
 
     return (
         <CartContext.Provider
@@ -84,7 +90,8 @@ export function CartProvider({ children }: CartProviderProps) {
                 decreaseCartQuantity,
                 removeFromCart,
                 cartItems,
-                cartQuantity
+                cartQuantity,
+                clearCart
             }}
         >
             {children}

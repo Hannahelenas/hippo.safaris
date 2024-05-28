@@ -10,7 +10,7 @@ interface ErrorTextProps {
 }
 
 const Checkout = () => {
-    const { cartQuantity, cartItems } = useCart();
+    const { cartQuantity, cartItems, clearCart } = useCart();
 
     const totalCost = cartItems.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -59,6 +59,7 @@ const Checkout = () => {
                 console.log('Order data:', orderData);
 
                 formik.resetForm();
+                clearCart();
             } catch (error) {
                 console.error('Error handling form submission:', error);
             }

@@ -53,9 +53,8 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
     '& .MuiBadge-badge': {
         right: -3,
         top: 13,
-        border: `2px solid white`,
-        backgroundColor: 'orange',
-        color: 'black',
+        backgroundColor: '#990000',
+        color: 'white',
         padding: '0 4px'
     }
 }));

@@ -10,6 +10,7 @@ interface TourCardProps {
     image: string;
     price: number;
     country: string;
+
 }
 
 
@@ -30,7 +31,7 @@ const Overlay = styled('div')({
     flexDirection: 'column',
     color: 'white',
     /* backgroundColor: 'rgba(0, 0, 0, 0.3)', */
-    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
+    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0))',
 });
 
 const OverlayContent = styled('div')({
