@@ -81,6 +81,18 @@ app.get('/safaris/:safariId', async (req: Request, res: Response) => {
     }
 });
 
+//Endpoint for classic safaris
+ app.get('/classic', async (_req: Request, res: Response) => {
+    const category: string = 'Classic'
+    try {
+        const classicSafaris: Safari[] = await database.all('SELECT * FROM Safaris WHERE category = ?', [category]);
+        res.json(classicSafaris)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.get('*', (_request: Request, response: Response) => {
     response.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
@@ -89,7 +101,8 @@ app.get('*', (_request: Request, response: Response) => {
 app.post('/orders', async (req: Request, res: Response) => {
     try {
         // Extract data from post request
-        const { email, lastName, name, phone, totalCost, products }: Order = req.body;
+        const { email, lastName, name, phone, totalCost, products }: Order =
+            req.body;
 
         // Add new order to database
         const result = await database.run(
@@ -100,7 +113,7 @@ app.post('/orders', async (req: Request, res: Response) => {
             [email, lastName, name, phone, totalCost]
         );
 
-        // Get the latest orderid 
+        // Get the latest orderid
         const orderId = result.lastID;
 
         // Add products to the order details table
