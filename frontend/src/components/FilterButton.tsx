@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface ButtonProps {
     text: string;
+    onClick: () => void;
 }
 
 const CustomFilterButton = styled(Button)`
@@ -21,9 +22,9 @@ background-color: rgba(255, 255, 255, 0.8) !important;
 
 `;
 
-const FilterButton: React.FC<ButtonProps> = ({ text }) => {
+const FilterButton: React.FC<ButtonProps> = ({ text, onClick }) => {
   return (
-    <CustomFilterButton variant="contained" disableElevation size="large">
+    <CustomFilterButton onClick={onClick} variant="contained" disableElevation size="large">
       {text}
     </CustomFilterButton>
   );

@@ -93,6 +93,30 @@ app.get('/classic', (_req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
+//Endpoint for family safaris
+app.get('/family', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = 'Family';
+    try {
+        const familySafaris = yield database.all('SELECT * FROM Safaris WHERE category = ?', [category]);
+        res.json(familySafaris);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
+//Endpoint for premium safaris
+app.get('/premium', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = 'Premium';
+    try {
+        const familySafaris = yield database.all('SELECT * FROM Safaris WHERE category = ?', [category]);
+        res.json(familySafaris);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
 app.get('*', (_request, response) => {
     response.sendFile(path_1.default.join(__dirname, 'dist', 'index.html'));
 });
