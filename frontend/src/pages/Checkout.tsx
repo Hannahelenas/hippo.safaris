@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface ErrorTextProps {
     visible: boolean;
@@ -11,6 +12,7 @@ interface ErrorTextProps {
 
 const Checkout = () => {
     const { cartQuantity, cartItems, clearCart } = useCart();
+    const navigate = useNavigate(); 
 
     const totalCost = cartItems.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -60,6 +62,7 @@ const Checkout = () => {
 
                 formik.resetForm();
                 clearCart();
+                navigate('/confirmation');
             } catch (error) {
                 console.error('Error handling form submission:', error);
             }
@@ -87,7 +90,6 @@ const Checkout = () => {
                     ) : (
                         <p>No summary to show.</p>
                     )}
-
                 </OrderSummary>
                 <FormWrapper>
                     <h2>Contact details</h2>

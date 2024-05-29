@@ -10,6 +10,7 @@ import Tours from './pages/Tours';
 import TourDetails from './pages/TourDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Confirmation from './pages/Confirmation';
 
 // Components
 import NavBar from './components/NavBar';
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/checkout',
                 Component: Checkout
+            },
+            {
+                path: '/confirmation',
+                Component: Confirmation
             },
         ]
     }
