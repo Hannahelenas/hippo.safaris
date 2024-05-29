@@ -31,6 +31,9 @@ const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 1.5rem;
+    @media (max-width: 768px) {
+        margin-top: 70vh;
+    }
 `;
 
 const Title = styled.h1`
