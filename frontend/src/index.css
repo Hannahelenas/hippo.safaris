@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap'); */
+
 body{
-    font-family:'Nunito Sans', 'Roboto', 'Oxygen' !important;
+    font-family:'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important;
 }
+
+/* h1 {
+    font-size: 44px;
+    font-weight: 400;
+    font-family: 'Lora', sans-serif ;
+} */
 
 .MuiButtonBase-root .MuiButton-root .MuiTypography-root {
     font-family:'Nunito Sans', 'Roboto', 'Oxygen' !important;

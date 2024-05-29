@@ -24,7 +24,7 @@ const Title = styled.h1`
     text-align: center;
     color: white;
     font-size: 44px;
-    font-weight: bold;
+    /* font-weight: 400; */
     margin-bottom: 5rem;
 `;
 const TitleContainer = styled.div`

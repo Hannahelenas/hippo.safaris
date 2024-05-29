@@ -12,14 +12,12 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { NavLink, useMatch } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-
 
 const pages = [
     {
@@ -67,7 +65,6 @@ function NavBar() {
         right: false
     });
 
-
     const { cartQuantity } = useCart();
 
     const toggleDrawer =
@@ -94,6 +91,7 @@ function NavBar() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
+            <Divider />
             <List>
                 {pages.map((page) => (
                     <ListItem key={page.component} disablePadding>
@@ -103,12 +101,15 @@ function NavBar() {
                     </ListItem>
                 ))}
             </List>
-            <Divider />
         </Box>
     );
 
     return (
-        <AppBar position="absolute" elevation={0}  sx={{ backgroundColor: 'transparent' }}>
+        <AppBar
+            position="absolute"
+            elevation={0}
+            sx={{ backgroundColor: 'transparent' }}
+        >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -126,11 +127,7 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                      <img
-                            className="logo"
-                            src="Logo.png"
-                            alt="logo"
-                        />
+                        <img className="logo" src="Logo.png" alt="logo" />
                     </Typography>
 
                     <Box
@@ -159,24 +156,26 @@ function NavBar() {
                                         open={state[anchor]}
                                         onClose={toggleDrawer(anchor, false)}
                                         onOpen={toggleDrawer(anchor, true)}
+                                        PaperProps={{
+                                            style: {
+                                                backgroundColor: '#F9F6F3' // Byt ut 'red' mot önskad färg
+                                            }
+                                        }}
                                     >
-                                        <Button
-                                            disableElevation
-                                            variant="contained"
-                                            endIcon={<CloseIcon />}
+                                        <IconButton
+                                            aria-label="close menu"
+                                            color="inherit"
                                             onClick={toggleDrawer(
                                                 anchor,
                                                 false
                                             )}
-                                            sx={{
-                                                alignSelf: 'flex-end', // Place button to the right
-                                                width: 'auto',
-                                                mt: 2,
-                                                mr: 1
+                                            style={{
+                                                alignSelf: 'flex-end',
+                                                margin: '0.5rem'
                                             }}
                                         >
-                                            Close
-                                        </Button>
+                                            <CloseIcon />
+                                        </IconButton>
                                         {list(anchor)}
                                     </SwipeableDrawer>
                                 </React.Fragment>
@@ -199,11 +198,7 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                        <img
-                            className="logo"
-                            src="Logo.png"
-                            alt="logo"
-                        />
+                        <img className="logo" src="Logo.png" alt="logo" />
                     </Typography>
                     {/* <Box
                         sx={{
@@ -243,7 +238,11 @@ function NavBar() {
                             </StyledBadge>
                         </IconButton> */}
 
-                        <IconButton aria-label="cart" component={NavLink} to="/cart">
+                        <IconButton
+                            aria-label="cart"
+                            component={NavLink}
+                            to="/cart"
+                        >
                             <StyledBadge badgeContent={cartQuantity}>
                                 <ShoppingCartIcon sx={{ color: 'white' }} />
                             </StyledBadge>
