@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FilterButton from './FilterButton';
+/* import FilterButton from './FilterButton'; */
 
 const Hero = styled.div`
     margin-top: 0;
@@ -47,15 +47,28 @@ const FilterButtonContainer = styled.div`
 `;
 
 const ToursHero = () => {
+
     return (
         <Hero>
             <TitleContainer>
                 <Title>Discover wildlife with our excellent guided tours</Title>
                 <FilterButtonContainer>
-                    <FilterButton text={'See all'} />
-                    <FilterButton text={'Classic'} />
-                    <FilterButton text={'Family'} />
-                    <FilterButton text={'Premium'} />
+                {/* <FilterButton
+                    text={'See all'}
+                    onClick={() => setCategory('all')}
+                />
+                <FilterButton
+                    text={'Classic'}
+                    onClick={() => setCategory('classic')}
+                />
+                <FilterButton
+                    text={'Family'}
+                    onClick={() => setCategory('family')}
+                />
+                <FilterButton
+                    text={'Premium'}
+                    onClick={() => setCategory('premium')}
+                /> */}
                 </FilterButtonContainer>
             </TitleContainer>
         </Hero>

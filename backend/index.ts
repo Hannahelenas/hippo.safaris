@@ -44,6 +44,8 @@ let database: Database;
     console.log('Redo att göra databasanrop');
 })();
 
+
+
 const app = express();
 
 app.use(express.static(path.join(path.resolve(), 'dist')));
@@ -82,11 +84,44 @@ app.get('/safaris/:safariId', async (req: Request, res: Response) => {
 });
 
 //Endpoint for classic safaris
- app.get('/classic', async (_req: Request, res: Response) => {
-    const category: string = 'Classic'
+app.get('/classic', async (_req: Request, res: Response) => {
+    const category: string = 'Classic';
     try {
-        const classicSafaris: Safari[] = await database.all('SELECT * FROM Safaris WHERE category = ?', [category]);
-        res.json(classicSafaris)
+        const classicSafaris: Safari[] = await database.all(
+            'SELECT * FROM Safaris WHERE category = ?',
+            [category]
+        );
+        res.json(classicSafaris);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+//Endpoint for family safaris
+app.get('/family', async (_req: Request, res: Response) => {
+    const category: string = 'Family';
+    try {
+        const familySafaris: Safari[] = await database.all(
+            'SELECT * FROM Safaris WHERE category = ?',
+            [category]
+        );
+        res.json(familySafaris);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+//Endpoint for premium safaris
+app.get('/premium', async (_req: Request, res: Response) => {
+    const category: string = 'Premium';
+    try {
+        const familySafaris: Safari[] = await database.all(
+            'SELECT * FROM Safaris WHERE category = ?',
+            [category]
+        );
+        res.json(familySafaris);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
