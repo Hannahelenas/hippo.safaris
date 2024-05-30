@@ -24,3 +24,17 @@ a:hover {
 li {
     list-style: none;
 }
+
+.footer-link  {
+    color: #000000;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.footer-link:active{
+    color: #000000;
+}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const FooterWrapper = styled.div`
 background-color: #F9F6F3 /* #efebe8 */;
@@ -23,7 +24,7 @@ const FooterSection = () => {
   return (
     <FooterWrapper><LinkList><ListItem>DESTINATIONS</ListItem>
     <ListItem>INFORMATION</ListItem>
-    <ListItem>CONTACT</ListItem></LinkList></FooterWrapper>
+    <ListItem><NavLink to="/contact" className="footer-link">CONTACT</NavLink></ListItem></LinkList></FooterWrapper>
   )
 }
 
