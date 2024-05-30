@@ -11,7 +11,6 @@ import { useCart } from "../context/CartContext";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { useNavigate } from "react-router-dom";
-/* import { DatePicker } from '@mui/x-date-pickers/DatePicker'; */
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
@@ -106,18 +105,6 @@ const TourDetails = () => {
                     },
                   }}
                 />
-                <DatepickerContainer>
-                  {/* <StyledDatePicker
-                                    value={value}
-                                    onChange={(newValue: Dayjs | null) =>
-                                        setValue(newValue)
-                                    }
-                                    defaultValue={today}
-                                    disablePast
-                                    sx={{ width: '100%' }}
-                                    label="Enter date"
-                                /> */}
-                </DatepickerContainer>
                 <hr />
                 <SelectedDateContainer>
                   <p>
@@ -325,11 +312,6 @@ const StyledStaticDatePicker = styled(StaticDatePicker)({
   },
 });
 
-const DatepickerContainer = styled.div`
-  margin-top: 1rem;
-  width: 90%;
-  background-color: #f9f6f3;
-`;
 const SelectedDateContainer = styled.div`
     /* background-color: #F9F6F3; */
     width: 90%;

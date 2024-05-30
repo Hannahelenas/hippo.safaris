@@ -27,7 +27,11 @@ const pages = [
     {
         component: 'Tours',
         path: '/tours'
-    }
+    },
+    {
+        component: 'Contact',
+        path: '/contact'
+    },
 ];
 
 type Anchor = 'top' | 'right' | 'left' | 'bottom';

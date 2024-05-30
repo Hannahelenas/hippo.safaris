@@ -11,6 +11,7 @@ import TourDetails from './pages/TourDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation';
+import Contact from './pages/Contact';
 
 // Components
 import NavBar from './components/NavBar';
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/confirmation',
                 Component: Confirmation
+            },
+            {
+                path: '/contact',
+                Component: Contact
             },
         ]
     }
