@@ -1,30 +1,35 @@
-import { Button } from "@mui/material";
 import styled from "styled-components";
 
 interface ButtonProps {
-    text: string;
-    onClick: () => void;
+  text: string;
+  onClick: () => void;
+  selected: boolean;
 }
 
-const CustomFilterButton = styled(Button)`
-background-color: rgba(255, 255, 255, 0.8) !important;
-  color: black !important;
-  width: 154.41px !important;
-  padding: 0.8rem 2.5rem !important;
-  font-weight: bold !important;
-  font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
-  text-transform: none !important;
-  border-radius: 5px;
+const CustomFilterButton = styled.button<{ selected: boolean }>`
+  background-color: ${(props) => (props.selected ? "#595959" : "#efebe8")};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: ${(props) => (props.selected ? "white" : "black")};
+  padding: 0.8rem 2rem;
+  border-radius: 40px;
+  font-family: "Lora", "Nunito Sans", "Roboto", "Oxygen";
+  text-transform: none;
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    text-decoration: none !important;
+    background-color: #595959;
+    color: white;
   }
-
 `;
 
-const FilterButton: React.FC<ButtonProps> = ({ text, onClick }) => {
+const FilterButton: React.FC<ButtonProps> = ({ text, onClick, selected }) => {
   return (
-    <CustomFilterButton onClick={onClick} variant="contained" disableElevation size="large">
+    <CustomFilterButton onClick={onClick} selected={selected}>
       {text}
     </CustomFilterButton>
   );
