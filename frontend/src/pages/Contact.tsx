@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import ContactIntro from "../components/ContactIntro";
-import ContactForm from "../components/ContactForm";
+/* import ContactForm from "../components/ContactForm"; */
+import FormSection from "../components/FormSection";
 
 const Contact = () => {
   return (
     <>
-    <Hero>
-      <TitleContainer>
-        <Title>Contact us</Title>
-         </TitleContainer>
-
-    </Hero>
-    <ContactIntro/>
-    <ContactForm />
-     </>
+      <Hero>
+        <TitleContainer>
+          <Title>Contact us</Title>
+        </TitleContainer>
+      </Hero>
+      <ContactIntro />
+      {/* <ContactForm /> */}
+      <FormSection />
+    </>
   );
 };
 
