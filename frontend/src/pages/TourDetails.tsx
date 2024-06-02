@@ -334,7 +334,7 @@ const ButtonGroup = styled.div`
 `;
 
 const AddButton = styled.button`
-  background-color: #5f6453;
+ /*  background-color: #5f6453;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -346,16 +346,33 @@ const AddButton = styled.button`
   text-transform: none;
   border: none;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; */
+
+  backgrund-color: white;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 3rem;
+  border-radius: 40px;
+  font-family: "Nunito Sans", "Roboto", "Oxygen";
+  text-transform: none;
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  &:hover {
+    background-color: #F9F6F3;
+    color: #000000;
+  }
 
   svg {
     margin-left: 0.5rem;
   }
-  /* border-radius: 5px; */
-  /* &:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-  } */
+
 `;
 
 const AmountButton = styled.button`
