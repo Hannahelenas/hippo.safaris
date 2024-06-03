@@ -1,247 +1,310 @@
-import styled from 'styled-components';
-import React from 'react';
-import { useCart } from '../context/CartContext';
-import { Button,  IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import React from "react";
+import { useCart } from "../context/CartContext";
+import { /* Button, */ IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+/* import { Link } from 'react-router-dom'; */
+import { useNavigate } from "react-router-dom";
 
 /* import { NavLink } from 'react-router-dom';  */
 
 const Cart: React.FC = () => {
-    const {
-        cartQuantity,
-        cartItems,
-        decreaseCartQuantity,
-        increaseCartQuantity,
-        removeFromCart
-    } = useCart();
-    const totalCost = cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-    );
+  const {
+    cartQuantity,
+    cartItems,
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    removeFromCart,
+  } = useCart();
+  const totalCost = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <Background>
-                <CartWrapper>
-                    <CartItems>
-                        <h2>Your cart</h2>
-                        {cartQuantity ? (
-                            <ul>
-                                {cartItems.map((item) => (
-                                    <CartItem key={item.id}>
-                                        <ItemDetails>
-                                            <p>{item.name}</p>
-                                            <p>Travel start: {item.date}</p>
-                                            {/* <p>Participants: {item.quantity}</p> */}
-                                            <Participants>
-                                                <span>Tickets: {item.quantity}</span>
-                                                <ButtonGroup>
-                                                    <Button
-                                                        variant="contained"
-                                                        disableElevation
-                                                        size="small"
-                                                        color="primary"
-                                                        onClick={() => decreaseCartQuantity(item.id)}
-                                                    >
-                                                        -
-                                                    </Button>
-                                                    <Button
-                                                        variant="contained"
-                                                        disableElevation
-                                                        size="small"
-                                                        color="primary"
-                                                        onClick={() => increaseCartQuantity(item.id, item.name, item.price, item.date)}
-                                                    >
-                                                        +
-                                                    </Button>
-                                                </ButtonGroup>
-                                            </Participants>
-                                            <p>
-                                                Total:
-                                                {item.price * item.quantity}$
-                                            </p>
-
-                                        </ItemDetails>
-                                        <RemoveButtonContainer>
-                                            <IconButton
-                                                aria-label="delete"
-                                                color="inherit"
-                                                onClick={() =>
-                                                    removeFromCart(item.id)
-                                                }
-                                            >
-                                                <CloseIcon />
-                                            </IconButton>
-                                        </RemoveButtonContainer>
-                                    </CartItem>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p>Your Cart is empty!</p>
-                        )}
-                    </CartItems>
-                    {cartQuantity > 0 && (
-                       <CartSummary>
-                            {/* <h3>Total</h3>
+  return (
+    <>
+      <Background>
+        <CartWrapper>
+          <CartItems>
+            <h2>Your cart</h2>
+            <hr />
+            {cartQuantity ? (
+              <ul>
+                {cartItems.map((item) => (
+                  <CartItem key={item.id}>
+                    <ItemDetails>
+                      <p>{item.name}</p>
+                      <p>Travel start: {item.date}</p>
+                      {/* <p>Participants: {item.quantity}</p> */}
+                      <Participants>
+                        <span>Tickets: {item.quantity}</span>
+                        <ButtonGroup>
+                          <AmountButton
+                         /*    variant="contained"
+                            disableElevation
+                            size="small"
+                            color="primary" */
+                            onClick={() => decreaseCartQuantity(item.id)}
+                          >
+                            -
+                          </AmountButton>
+                          <AmountButton
+                            /* variant="contained"
+                            disableElevation */
+                            /* size="small"
+                            color="primary" */
+                            onClick={() =>
+                              increaseCartQuantity(
+                                item.id,
+                                item.name,
+                                item.price,
+                                item.date,
+                              )
+                            }
+                          >
+                            +
+                          </AmountButton>
+                        </ButtonGroup>
+                      </Participants>
+                      <p>
+                        Product total:
+                        {item.price * item.quantity}$
+                      </p>
+                    </ItemDetails>
+                    <RemoveButtonContainer>
+                      <IconButton
+                        aria-label="delete"
+                        color="inherit"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </RemoveButtonContainer>
+                  </CartItem>
+                ))}
+              </ul>
+            ) : (
+              <p>Your Cart is empty!</p>
+            )}
+          </CartItems>
+          {cartQuantity > 0 && (
+            <CartSummary>
+              {/* <h3>Total</h3>
                             <p>{totalCost}</p> */}
-                            <h2>Total</h2>
-                            <p>{totalCost}</p>
-                            <ButtonContainer>
-                                <StyledButton
-                                    variant="contained"
-                                    disableElevation
-                                    as={Link}
-                                     to="/checkout"
-                                >
-                                    Checkout
-                                </StyledButton>
-                            </ButtonContainer>
-                        </CartSummary>
-                    )}
-
-                </CartWrapper>
-            </Background>
-        </>
-    );
+              <h2>Total</h2>
+              <hr />
+              <p>{totalCost}$</p>
+              <ButtonContainer>
+                <StyledButton
+                  /*  as={Link}
+                                     to="/checkout" */
+                  onClick={() => navigate("/checkout")}
+                >
+                  Checkout
+                </StyledButton>
+              </ButtonContainer>
+            </CartSummary>
+          )}
+        </CartWrapper>
+      </Background>
+    </>
+  );
 };
 
 export default Cart;
 
 const Background = styled.div`
-    margin-top: 0;
-    height: 90vh;
-    width: 100vw;
-    position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)),
-    url('giraffs.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-    overflow-x: hidden !important;
-    box-sizing: border-box !important;
-    display: flex;
-    justify-content: center;
+  margin-top: 0;
+  min-height: 90vh;
+  width: 100vw;
+  position: relative;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0)
+    ),
+    url("rhinos.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  display: flex;
+  justify-content: center;
 `;
 
 const CartWrapper = styled.div`
-    background-color: rgba(240, 240, 240, 0.0);
-    width: 100vw;
-    margin-top: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+  background-color: rgba(240, 240, 240, 0);
+  width: 100vw;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 
-    @media (max-width: 768px) {
-        width: 100vw;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        /* padding: 5px; */
-    }
+  @media (max-width: 768px) {
+    width: 100vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* padding: 5px; */
+  }
 `;
 
 const CartItems = styled.div`
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 50vw;
-    margin-left: 3rem;
-    h2,
-    p {
-        margin: 1rem;
-    }
+  background-color: rgba(255, 255, 255, 1);
+  width: 50vw;
+  height: auto;
+  margin-left: 3rem;
+  h2 {
+    margin: 1rem;
+    /*   margin-left: 1rem; */
+  }
+  hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-top: 1rem;
+  }
+  p {
+    margin: 1rem;
+  }
 
-    @media (max-width: 768px) {
-        width: 90vw;
-        margin-left: 0;
-        margin-bottom: 1rem;
-    }
+  @media (max-width: 768px) {
+    width: 90vw;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
 `;
 
 const CartItem = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 0.5rem;
 `;
 
 const ItemDetails = styled.div`
-    flex: 3;
+  flex: 3;
 
-    p {
-        margin: 0.5rem 0;
-        margin-left: 1rem;
-    }
+  p {
+    margin: 0.5rem 0;
+    margin-left: 1rem;
+  }
 `;
 
 const Participants = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    span {
-        margin-right: 1rem;
-        margin-left: 1rem;
-    }
+  span {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
 `;
 const ButtonGroup = styled.div`
-    display: flex;
-    gap: 10px;
-    margin-left: 1rem;
+  display: flex;
+  gap: 10px;
+  margin-left: 1rem;
 `;
 
 const RemoveButtonContainer = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-self: flex-start;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
 `;
 
 const CartSummary = styled.div`
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 30vw;
-    margin-right: 4rem;
-    h2,
-    p {
-        margin: 1rem;
-    }
+  background-color: rgba(255, 255, 255, 1);
+  width: 30vw;
+  margin-right: 4rem;
+  h2 {
+    margin: 1rem;
+    /*   margin-left: 1rem; */
+  }
+  hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-top: 1rem;
+  }
+  p {
+    margin: 1rem;
+    margin-bottom: 2rem;
+  }
 
-    @media (max-width: 768px) {
-        width: 90vw;
-        margin: 0;
-    }
+  @media (max-width: 768px) {
+    width: 90vw;
+    margin: 0;
+  }
 `;
 
 const ButtonContainer = styled.div`
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    /* padding: 1rem; */
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* padding: 1rem; */
+  margin-bottom: 2rem;
+  margin-right: 1rem;
 
-    @media (max-width: 768px) {
-        width: 100%;
-    }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
-const StyledButton = styled(Button)`
-    background-color: rgba(19, 40, 19, 1) !important;
-    color: white !important;
-    padding: 0.8rem 2.5rem !important;
-    font-weight: bold !important;
-    font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
-    text-transform: none !important;
-    border-radius: 5px;
-    margin: 0;
+const StyledButton = styled.button`
+  background-color: #595959;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none !important;
+  align-items: center;
+  padding: 0.8rem 3rem;
+  margin-right: 0.5rem;
+  border-radius: 40px;
+  font-family: "Lora", "Nunito Sans", "Roboto", "Oxygen";
+  text-transform: none;
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+ &:hover {
+    background-color: rgba(89, 89, 89, 0.9);
+    color: white;
+  }
+  @media (max-width: 768px) {
+    margin-right: 1.5rem;
+  }
+
+}
+`;
+
+const AmountButton = styled.button`
+  background-color: /* #F4EDE6 *//* #efebe8 */ #595959;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+ border-radius: 5px;
+ border: none;
+  width: 50px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 
     &:hover {
-        background-color: rgba(19, 40, 19, 0.9) !important;
-        text-decoration: none !important;
-    }
-    @media (max-width: 768px) {
-        margin-right: 1rem;
+        background-color: rgba(89, 89, 89, 0.9);
+        color: white;
       }
 `;

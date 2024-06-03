@@ -13,6 +13,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import TourDetailsIntro from "../components/TourDetailsIntro";
+
 
 interface Safari {
   id: number;
@@ -75,17 +77,18 @@ const TourDetails = () => {
             category={safari.category}
           />
           {/* <div>{safari.id}</div> */}
+           <TourDetailsIntro image={safari.image} description={safari.description} price={safari.price} country={safari.country}/>
           <TourInfoWrapper>
-            <PageIntro>
+            {/* <PageIntro>
               <h2>Description</h2>
               <hr />
               <p>{safari.description}</p>
-              <p>Price{safari.price} per person</p>
+              <p>Price{safari.price}$ per person</p>
               <p>{safari.name}</p>
 
-              <p>{safari.country}</p>
-              <p>{safari.category}</p>
-            </PageIntro>
+              <p>Destination {safari.country}</p>
+              <p>Category {safari.category}</p>
+            </PageIntro> */}
             <BookingWrapper>
               <h2>Plan your trip</h2>
               <hr />
@@ -181,12 +184,31 @@ export default TourDetails;
 const TourInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   flex-wrap: wrap;
-  background-color: /* #efebe8 */ #f9f6f3;
+  position: relative;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("rhinos.jpg");
+
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  @media (max-width: 768px) {
+    justify-content: center;
+  align-items: center;
+  }
 `;
 
-const PageIntro = styled.div`
+/* const PageIntro = styled.div`
   width: 50vw;
   display: flex;
   flex-direction: column;
@@ -194,8 +216,8 @@ const PageIntro = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 3rem;
+
   h2 {
-    /* margin-top: 3rem; */
     font-size: 32px;
   }
   hr {
@@ -207,21 +229,24 @@ const PageIntro = styled.div`
   @media (max-width: 768px) {
     width: 90vw;
   }
-`;
+`; */
 
 const BookingWrapper = styled.div`
-  background-color: "white";
+  background-color: white;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   width: 25vw;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   margin-top: 3rem;
-  margin-left: 2rem;
+  margin-left: 7rem;
   h2 {
     font-size: 32px;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+
   }
   hr {
     width: 100%;
@@ -270,7 +295,8 @@ const BottomButtonContainer = styled.div`
 `;
 
 const StyledStaticDatePicker = styled(StaticDatePicker)({
-  marginTop: "1rem",
+  /* marginTop: "1rem", */
+  fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
   ".MuiDateCalendar-root": {
     color: "#000000",
     borderRadius: "5px",
@@ -348,12 +374,12 @@ const AddButton = styled.button`
   cursor: pointer;
   margin-bottom: 1rem; */
 
-  backgrund-color: white;
+  background-color: #efebe8;
   color: #000000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 3rem;
+  padding: 0.8rem 2rem;
   border-radius: 40px;
   font-family: "Nunito Sans", "Roboto", "Oxygen";
   text-transform: none;
@@ -361,13 +387,14 @@ const AddButton = styled.button`
   font-weight: 500;
   border: none;
   cursor: pointer;
+  margin-bottom: 1rem;
   transition:
     background-color 0.3s,
     color 0.3s;
-  &:hover {
+ /*  &:hover {
     background-color: #F9F6F3;
     color: #000000;
-  }
+  } */
 
   svg {
     margin-left: 0.5rem;
@@ -382,7 +409,7 @@ const AmountButton = styled.button`
   cursor: pointer;
  border-radius: 5px;
  border: none;
-  width: 70px;
+  width: 50px;
   transition:
     background-color 0.3s,
     color 0.3s;

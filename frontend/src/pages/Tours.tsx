@@ -22,6 +22,10 @@ const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: 5rem;
+  @media (max-width: 768px) {
+    margin-botom: 2rem;
+  }
 `;
 
 const FilterButtonsContainer = styled.div`
@@ -31,9 +35,10 @@ const FilterButtonsContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem;
+  margin: 3rem;
   @media (max-width: 768px) {
     flex-direction: column;
+    margin: 2rem;
   }
 `;
 
