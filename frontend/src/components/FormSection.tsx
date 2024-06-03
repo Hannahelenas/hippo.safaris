@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useState } from "react";
 
 interface ErrorTextProps {
   visible: boolean;
 }
 
 const FormSection = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -34,7 +37,7 @@ const FormSection = () => {
           message: values.message,
         };
         console.log("Message data:", messageData);
-
+        setFormSubmitted(true);
         formik.resetForm();
       } catch (error) {
         console.error("Error handling form submission:", error);
@@ -111,14 +114,15 @@ const FormSection = () => {
           <ButtonWrapper>
             <StyledButton
               type="submit"
-              /* variant="contained" */
-              /* disableElevation */
               disabled={!formik.isValid || !formik.dirty}
             >
               Send
             </StyledButton>
           </ButtonWrapper>
         </Form>
+        {formSubmitted && (
+          <p>Thank you for your message! We will reach back to you soon.</p>
+        )}
       </FormWrapper>
     </Wrapper>
   );
