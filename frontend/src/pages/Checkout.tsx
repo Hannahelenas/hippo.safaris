@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useCart } from '../context/CartContext';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Button } from '@mui/material';
+/* import { Button } from '@mui/material'; */
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ interface ErrorTextProps {
 
 const Checkout = () => {
     const { cartQuantity, cartItems, clearCart } = useCart();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const totalCost = cartItems.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -74,6 +74,7 @@ const Checkout = () => {
             <CheckoutWrapper>
                 <OrderSummary>
                     <h2>Order summary</h2>
+                    <hr/>
                     {cartQuantity ? (
                         <div>
                             {cartItems.map((item) => (
@@ -83,16 +84,21 @@ const Checkout = () => {
                                     <p>Tickets: {item.quantity}</p>
                                     <p>Total: {item.price * item.quantity}</p>
                                     <p>Travel start date: {item.date}</p>
+                                    <hr/>
                                 </div>
                             ))}
-                            <p>Order total: {totalCost}</p>
+
+                            <p><strong>Order total: {totalCost}</strong></p>
+                            <hr/>
                         </div>
                     ) : (
                         <p>No summary to show.</p>
                     )}
+                    {/* <hr/> */}
                 </OrderSummary>
                 <FormWrapper>
                     <h2>Contact details</h2>
+                    <hr/>
                     <Form onSubmit={formik.handleSubmit}>
                         <StyledInput
                             id="email"
@@ -182,11 +188,9 @@ const Checkout = () => {
                         <ButtonWrapper>
                             <StyledButton
                                 type="submit"
-                                variant="contained"
-                                disableElevation
                                 disabled={!formik.isValid || !formik.dirty}
                             >
-                                Place Order
+                                Place order
                             </StyledButton>
                         </ButtonWrapper>
                     </Form>
@@ -200,7 +204,7 @@ export default Checkout;
 
 const Background = styled.div`
     margin-top: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     position: relative;
     background: linear-gradient(
@@ -210,7 +214,7 @@ const Background = styled.div`
             rgba(0, 0, 0, 0.1),
             rgba(0, 0, 0, 0)
         ),
-        url('giraffs.jpg');
+        url('rhinos.jpg');
     background-size: cover;
     background-position: center;
     z-index: 0;
@@ -240,15 +244,25 @@ const CheckoutWrapper = styled.div`
 `;
 
 const OrderSummary = styled.div`
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 1);
     width: 40vw;
-    height: 70vh;
+   /*  min-height: 50vh !important; */
+    height: auto;
     margin-left: 3rem;
     margin-bottom: 1rem;
-    h2,
     p {
         margin: 1rem;
     }
+    h2 {
+        margin: 1rem;
+        /*   margin-left: 1rem; */
+      }
+      hr {
+        width: 100%;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin-top: 1rem;
+      }
 
     @media (max-width: 768px) {
         width: 90vw;
@@ -259,12 +273,21 @@ const OrderSummary = styled.div`
 `;
 
 const FormWrapper = styled.div`
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 1);
     width: 40vw;
     height: 70vh;
     margin-right: 4rem;
-    margin-bottom: 1rem;
-    h2,
+    margin-bottom: 2rem;
+    h2 {
+        margin: 1rem;
+        /*   margin-left: 1rem; */
+      }
+      hr {
+        width: 100%;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin-top: 1rem;
+      }
     p {
         margin: 1rem;
     }
@@ -281,18 +304,26 @@ const Form = styled.form`
     margin: auto;
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
 `;
 
 const StyledInput = styled.input`
     width: auto;
     height: 40px;
     border: none;
+    border-radius: 5px;
+    /* border: 1px solid grey; */
+    color: black;
     margin: 0.5rem;
     padding: 8px;
     background-color: #f9f6f3;
     box-sizing: border-box;
-    /*  border-radius: 4px; */
     outline: none;
+
+    &::placeholder {
+        color: #000000; /* Kolsvart färg för placeholders */
+        opacity: 1; /* För att säkerställa att färgen är stark */
+    }
 
     &:focus {
         border: 1px solid #c02b0a;
@@ -328,17 +359,37 @@ const ButtonWrapper = styled.div`
     margin-bottom: 1rem;
 `;
 
-const StyledButton = styled(Button)`
-    background-color: rgba(19, 40, 19, 1) !important;
-    color: white !important;
-    padding: 0.8rem 2.5rem !important;
-    font-weight: bold !important;
-    font-family: 'Nunito Sans', 'Roboto', 'Oxygen' !important;
-    text-transform: none !important;
-    border-radius: 5px;
+const StyledButton = styled.button`
+  background-color: #595959;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none !important;
+  align-items: center;
+  padding: 0.8rem 3rem;
+  margin-right: 0.5rem;
+  border-radius: 40px;
+  font-family: "Lora", "Nunito Sans", "Roboto", "Oxygen";
+  text-transform: none;
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+ &:hover {
+    background-color: rgba(89, 89, 89, 0.9);
+    color: white;
+  }
+  &:disabled {
+    background-color: rgba(89, 89, 89, 0.8);
+    color: white;
+    cursor: not-allowed;
+  }
+  @media (max-width: 768px) {
+    margin-right: 1.5rem;
+  }
 
-    &:hover {
-        background-color: rgba(19, 40, 19, 0.9) !important;
-        text-decoration: none !important;
-    }
+}
 `;

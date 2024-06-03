@@ -13,7 +13,7 @@ const TitleContainer = styled.div`
     justify-content: center;
     align-items: center;
     h2 {
-        margin-top: 3rem;
+        margin-top: 4rem;
         font-size: 32px;
     }
 
@@ -28,7 +28,7 @@ const PromoToursContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding-bottom: 3rem;
+    padding-bottom: 5rem;
     background-color: #efebe8;
 `;
 

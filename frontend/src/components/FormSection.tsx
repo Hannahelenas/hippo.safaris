@@ -33,7 +33,7 @@ const FormSection = () => {
           phone: values.phone,
           message: values.message,
         };
-        console.log("Order data:", messageData);
+        console.log("Message data:", messageData);
 
         formik.resetForm();
       } catch (error) {
@@ -46,7 +46,6 @@ const FormSection = () => {
       {" "}
       <FormWrapper>
         <h2>Send us a message</h2>
-        <hr />
         <Form onSubmit={formik.handleSubmit}>
           <StyledInput
             id="email"
@@ -179,7 +178,7 @@ const InputStyles = `
   border: 1px;
   border-radius: 5px;
   border: none;
-  margin: 0.5rem 0;
+  margin: 0.6rem 0;
   padding: 8px;
   background-color:  #f9f6f3;
   box-sizing: border-box;
@@ -240,12 +239,12 @@ const StyledButton = styled.button`
     color 0.3s;
 
   &:not(:disabled) {
-    background-color: #595959;
-    color: white;
+    background-color: white;
+    color: black;
   }
 
   &:disabled {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.7);
     color: black;
     cursor: not-allowed;
   }

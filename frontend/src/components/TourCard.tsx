@@ -85,7 +85,7 @@ const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => 
                         {country}
                         </Typography>
                         <Typography variant="body2" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
-                            {price}
+                            {price}$
                         </Typography>
 
                         </OverlayContent>
