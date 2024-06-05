@@ -25,7 +25,7 @@ const ContactIntro = () => {
           </p>
         </ContactDetails>
         <ImageContainer>
-          <img src="zebras.jpg" alt="Zebras on savannah" />
+          <img src="andrew-liu-NAmlq7_JEYw-unsplash.jpg" alt="Lion" />
         </ImageContainer>
       </ContactWrapper>
     </>

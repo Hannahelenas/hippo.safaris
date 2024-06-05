@@ -206,7 +206,7 @@ const Background = styled.div`
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0)
     ),
-    url("rhinos.jpg");
+    url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -281,6 +281,9 @@ const FormWrapper = styled.div`
   }
   p {
     margin: 1rem;
+  }
+  @media (max-width: 1024px) {
+    max-height: 45vh;
   }
 
   @media (max-width: 768px) {

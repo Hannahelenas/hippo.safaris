@@ -7,7 +7,7 @@ const Confirmation = () => (
         Your order has been sent, and we can't wait to see you! Please check
         your email for details about your upcoming safari.
       </p>
-      <Image src="hippos.jpg" alt="Hippos" />
+      <Image src="andrew-liu-NAmlq7_JEYw-unsplash.jpg" alt="Lion" />
     </ContentWrapper>
   </Background>
 );
@@ -43,7 +43,7 @@ const ContentWrapper = styled.div`
   margin-top: 15vh;
   display: flex;
   flex-direction: column;
-  height: 85vh;
+  height: 65vh;
   padding: 3rem;
   justify-content: center;
   align-items: center;
@@ -58,28 +58,43 @@ const ContentWrapper = styled.div`
 
   p {
     margin: 1rem;
+    width: 50vw;
   }
 
+  @media (max-width: 1024px) {
+    height: 60vh;
+    h2 {
+        margin-top: 4rem;
+      }
+  }
   @media (max-width: 768px) {
-    height: 50vh;
+    height: 60vh;
     margin-top: 10vh;
     margin-bottom: 0;
     padding: 1rem;
     width: 95vw;
 
     h2 {
-      margin-top: 2rem;
+      margin-top: 3rem;
     }
+    p {
+        margin: 1rem;
+        width: 80vw;
+      }
   }
 `;
 
 const Image = styled.img`
   margin-top: 1rem;
-  width: 60vw;
-  height: 65vh;
-  border-radius: 8px;
-  margin-bottom: 3rem;
+  width: 40vw;
+  height: 55vh;
+  border-radius: 4px;
+  margin-bottom: 4rem;
   margin-top: 1rem;
+  @media (max-width: 1024px) {
+    height: 45vh;
+    width: 90vw;
+  }
   @media (max-width: 768px) {
     width: 100%;
     height: auto;

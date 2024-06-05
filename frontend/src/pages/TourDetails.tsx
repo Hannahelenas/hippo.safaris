@@ -37,7 +37,7 @@ const TourDetails = () => {
   /* console.log("useParams:", useParams());
   console.log(`Fetching data for safariId: ${id}`); */
 
-// Use cart to handle cart functionality.
+  // Use cart to handle cart functionality.
   const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } =
     useCart();
   const quantity = id ? getItemQuantity(parseInt(id)) : 0;
@@ -72,7 +72,7 @@ const TourDetails = () => {
     <div>
       {safari ? (
         <div>
-            {/* Hero component */}
+          {/* Hero component */}
           <TourDetailsHero
             image={safari.image}
             name={safari.name}
@@ -193,7 +193,7 @@ const TourInfoWrapper = styled.div`
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url("rhinos.jpg");
+    url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
 
   background-size: cover;
   background-position: center;
@@ -203,6 +203,7 @@ const TourInfoWrapper = styled.div`
   @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
+    margin-top: 0;
   }
 `;
 
@@ -229,6 +230,9 @@ const BookingWrapper = styled.div`
     margin: 1rem 0;
   }
 
+  /* @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 35vw;
+  } */
   @media (max-width: 768px) {
     width: 90vw;
     margin-left: 0;

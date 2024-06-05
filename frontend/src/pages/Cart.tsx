@@ -110,7 +110,7 @@ const Background = styled.div`
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0)
     ),
-    url("rhinos.jpg");
+    url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
   background-size: cover;
   background-position: center;
   z-index: 0;

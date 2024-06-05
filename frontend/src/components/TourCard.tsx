@@ -29,7 +29,7 @@ const Overlay = styled("div")({
   flexDirection: "column",
   color: "white",
   background:
-    "linear-gradient(to top, rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))",
+    "linear-gradient(to top, rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))",
 });
 
 const OverlayContent = styled("div")({
