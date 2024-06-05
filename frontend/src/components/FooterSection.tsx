@@ -6,7 +6,7 @@ background-color: #F9F6F3 /* #efebe8 */;
 height: 40vh;
 width: 100%;
 display: flex;
-flex-direction: column; 
+flex-direction: column;
 justify-content: center;
 align-items: center;
 z-index: -1;
@@ -29,9 +29,9 @@ const CopyrightText = styled.p`
 
 const FooterSection = () => {
   return (
-    <FooterWrapper><LinkList><ListItem>DESTINATIONS</ListItem>
-    <ListItem>INFORMATION</ListItem>
-    <ListItem><NavLink to="/contact" className="footer-link">CONTACT</NavLink></ListItem></LinkList>
+    <FooterWrapper><LinkList><ListItem>Destinations</ListItem>
+    <ListItem>Information</ListItem>
+    <ListItem><NavLink to="/contact" className="footer-link">Contact</NavLink></ListItem></LinkList>
     <CopyrightText>
         &copy; {new Date().getFullYear()} Hippo Safaris. All rights reserved.
       </CopyrightText></FooterWrapper>

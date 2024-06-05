@@ -131,7 +131,7 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                        <img className="logo" src="Logo.png" alt="logo" />
+                        <img className="logo" src="logowhite.png" alt="logo" />
                     </Typography>
 
                     <Box
@@ -202,7 +202,7 @@ function NavBar() {
                             textDecoration: 'none'
                         }}
                     >
-                        <img className="logo" src="Logo.png" alt="logo" />
+                        <img className="logo" src="logowhite.png" alt="logo" />
                     </Typography>
                     {/* <Box
                         sx={{
