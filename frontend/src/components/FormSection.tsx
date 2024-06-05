@@ -66,7 +66,7 @@ const FormSection = () => {
         setFormSubmitted(true);
         // Reset form.
         formik.resetForm();
-        // Catch any errors. 
+        // Catch any errors.
       } catch (error) {
         console.error("Error handling form submission:", error);
       }
@@ -174,7 +174,7 @@ const Wrapper = styled.div`
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url("rhinos.jpg");
+    url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
 
   background-size: cover;
   background-position: center;
