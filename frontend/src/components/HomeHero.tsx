@@ -1,17 +1,13 @@
 import styled from "styled-components";
-/* import PrimaryButton from "./PrimaryButton"; */
 import DefaultButton from "./DefaultButton";
 import { useNavigate } from "react-router-dom";
+
 const Hero = styled.div`
   margin-top: 0;
   height: 95vh;
   width: 100vw;
   position: relative;
-  background: /* linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(38, 50, 56, 0.7) 100%
-    ), */ linear-gradient(
+  background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.2),
@@ -45,14 +41,13 @@ const GradientOverlay = styled.div`
     rgba(0, 0, 0, 0.6),
     rgba(0, 0, 0, 0.5),
     rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.0)
+    rgba(0, 0, 0, 0)
   );
 `;
 const Title = styled.h1`
   text-align: center;
   color: white;
   font-size: 44px;
-  /* font-weight: 400; */
   position: relative;
   z-index: 1;
   margin-bottom: 5rem;
@@ -68,6 +63,7 @@ const TitleContainer = styled.div`
 `;
 
 const HomeHero = () => {
+  // Using useNavigate hook for button navigation
   const navigate = useNavigate();
   return (
     <Hero>
@@ -78,7 +74,6 @@ const HomeHero = () => {
       <GradientOverlay />
       <TitleContainer>
         <Title>Safaris in Africas most beautiful landscape</Title>
-        {/* <PrimaryButton text={"Book now"} to="/tours" /> */}
         <DefaultButton text={"Book now"} onClick={() => navigate("/tours")} />
       </TitleContainer>
     </Hero>

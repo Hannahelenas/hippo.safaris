@@ -7,9 +7,10 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-
 import { PickersCalendarHeaderProps } from "@mui/x-date-pickers/PickersCalendarHeader";
 
+
+// Styling for calendarheader
 const CustomCalendarHeaderRoot = styled("div")({
     "& .MuiTypography-root": {
         fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
