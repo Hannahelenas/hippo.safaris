@@ -41,3 +41,13 @@ CREATE TABLE order_details (
     start_date TEXT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
+
+DROP TABLE IF EXISTS messages;
+CREATE TABLE messages (
+    message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    email TEXT NOT NULL,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    message TEXT NOT NULL
+);

@@ -32,6 +32,13 @@ interface Product {
     date: string;
 }
 
+interface Message {
+    email: string,
+    name: string,
+    phone: string,
+    message: string,
+}
+
 let database: Database;
 
 (async () => {
@@ -43,8 +50,6 @@ let database: Database;
     await database.run('PRAGMA foreign_keys = ON');
     console.log('Redo att göra databasanrop');
 })();
-
-
 
 const app = express();
 
@@ -165,6 +170,36 @@ app.post('/orders', async (req: Request, res: Response) => {
         res.status(201).json({
             message: 'Order created successfully',
             orderId
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Endpoint for posting messages
+app.post('/messages', async (req: Request, res: Response) => {
+    try {
+        // Extracting data from post request
+        const { email, name, phone, message }: Message = req.body;
+
+        // Validation of input data
+        if (!email || !name || !phone || !message) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        // Add the new message to database
+        const result = await database.run(
+            `
+            INSERT INTO messages (email, name, phone, message)
+            VALUES (?, ?, ?, ?)
+        `,
+            [email, name, phone, message]
+        );
+
+        res.status(201).json({
+            message: 'Message received',
+            messageId: result.lastID,
         });
     } catch (error) {
         console.error(error);

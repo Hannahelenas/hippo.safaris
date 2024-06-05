@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
+import axios from "axios";
 
 interface ErrorTextProps {
   visible: boolean;
@@ -15,8 +16,10 @@ const FormSection = () => {
       .string()
       .email("Enter a valid email")
       .required("Email is required"),
-    name: yup.string().required("Name is required")
-    .min(2, "Name must be at least two characters"),
+    name: yup
+      .string()
+      .required("Name is required")
+      .min(2, "Name must be at least two characters"),
     phone: yup
       .string()
       .required("Phone is required")
@@ -45,7 +48,14 @@ const FormSection = () => {
           phone: values.phone,
           message: values.message,
         };
+
+        const response = await axios.post(
+          "http://localhost:3000/messages",
+          messageData,
+        );
+
         console.log("Message data:", messageData);
+        console.log(response.data);
         setFormSubmitted(true);
         formik.resetForm();
       } catch (error) {
@@ -130,7 +140,7 @@ const FormSection = () => {
           </ButtonWrapper>
         </Form>
         {formSubmitted && (
-          <p>Thank you for your message! We will reach back to you soon.</p>
+          <p><strong>Thank you for your message! We will reach out to you soon.</strong></p>
         )}
       </FormWrapper>
     </Wrapper>
