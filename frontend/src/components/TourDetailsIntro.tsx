@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Interface for props
 interface TourDetailsIntroProps {
   image: string;
   description: string;
@@ -49,7 +50,7 @@ const ContactWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: /* #efebe8 */ #f9f6f3;
+  background-color: #f9f6f3;
 `;
 
 const ContactDetails = styled.div`

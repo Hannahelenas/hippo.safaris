@@ -1,5 +1,4 @@
 import styled from "styled-components";
-/* import FilterButton from './FilterButton'; */
 
 const Hero = styled.div`
   margin-top: 0;
@@ -11,7 +10,7 @@ const Hero = styled.div`
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.0)
+      rgba(0, 0, 0, 0)
     ),
     url("rhinos.jpg");
 
@@ -37,38 +36,11 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const FilterButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
 const ToursHero = () => {
   return (
     <Hero>
       <TitleContainer>
         <Title>Discover wildlife with our excellent guided tours</Title>
-        <FilterButtonContainer>
-          {/* <FilterButton
-                    text={'See all'}
-                    onClick={() => setCategory('all')}
-                />
-                <FilterButton
-                    text={'Classic'}
-                    onClick={() => setCategory('classic')}
-                />
-                <FilterButton
-                    text={'Family'}
-                    onClick={() => setCategory('family')}
-                />
-                <FilterButton
-                    text={'Premium'}
-                    onClick={() => setCategory('premium')}
-                /> */}
-        </FilterButtonContainer>
       </TitleContainer>
     </Hero>
   );

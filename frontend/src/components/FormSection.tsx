@@ -4,13 +4,16 @@ import * as yup from "yup";
 import { useState } from "react";
 import axios from "axios";
 
+// Interface form errortext
 interface ErrorTextProps {
   visible: boolean;
 }
 
 const FormSection = () => {
+    // State for handling display of confirmation text on form submit.
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  // Validationschema
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -32,6 +35,7 @@ const FormSection = () => {
       .max(1000, "Message must be at most 1000 characters"),
   });
 
+  // Initializing the formik hook to handle form submission and validation.
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,15 +44,17 @@ const FormSection = () => {
       message: "",
     },
     validationSchema: validationSchema,
+    // Function to handle form submit.
     onSubmit: async (values) => {
       try {
+        // Create messageobject from input.
         const messageData = {
           email: values.email,
           name: values.name,
           phone: values.phone,
           message: values.message,
         };
-
+        // Send post request to server.
         const response = await axios.post(
           "http://localhost:3000/messages",
           messageData,
@@ -56,8 +62,11 @@ const FormSection = () => {
 
         console.log("Message data:", messageData);
         console.log(response.data);
+        // Set state to true to show confirmation text after submit.
         setFormSubmitted(true);
+        // Reset form.
         formik.resetForm();
+        // Catch any errors. 
       } catch (error) {
         console.error("Error handling form submission:", error);
       }
@@ -140,7 +149,11 @@ const FormSection = () => {
           </ButtonWrapper>
         </Form>
         {formSubmitted && (
-          <p><strong>Thank you for your message! We will reach out to you soon.</strong></p>
+          <p>
+            <strong>
+              Thank you for your message! We will reach out to you soon.
+            </strong>
+          </p>
         )}
       </FormWrapper>
     </Wrapper>

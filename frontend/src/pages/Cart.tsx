@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import React from "react";
 import { useCart } from "../context/CartContext";
-import { /* Button, */ IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-/* import { Link } from 'react-router-dom'; */
 import { useNavigate } from "react-router-dom";
 
-/* import { NavLink } from 'react-router-dom';  */
-
 const Cart: React.FC = () => {
+  // Using cart to access cartcontext functionality.
   const {
     cartQuantity,
     cartItems,
@@ -20,6 +18,7 @@ const Cart: React.FC = () => {
     (total, item) => total + item.price * item.quantity,
     0,
   );
+  // Usenavigate hook for navigation
   const navigate = useNavigate();
 
   return (
@@ -36,24 +35,15 @@ const Cart: React.FC = () => {
                     <ItemDetails>
                       <p>{item.name}</p>
                       <p>Travel start: {item.date}</p>
-                      {/* <p>Participants: {item.quantity}</p> */}
                       <Participants>
                         <span>Tickets: {item.quantity}</span>
                         <ButtonGroup>
                           <AmountButton
-                         /*    variant="contained"
-                            disableElevation
-                            size="small"
-                            color="primary" */
                             onClick={() => decreaseCartQuantity(item.id)}
                           >
                             -
                           </AmountButton>
                           <AmountButton
-                            /* variant="contained"
-                            disableElevation */
-                            /* size="small"
-                            color="primary" */
                             onClick={() =>
                               increaseCartQuantity(
                                 item.id,
@@ -90,17 +80,11 @@ const Cart: React.FC = () => {
           </CartItems>
           {cartQuantity > 0 && (
             <CartSummary>
-              {/* <h3>Total</h3>
-                            <p>{totalCost}</p> */}
               <h2>Total</h2>
               <hr />
               <p>{totalCost}$</p>
               <ButtonContainer>
-                <StyledButton
-                  /*  as={Link}
-                                     to="/checkout" */
-                  onClick={() => navigate("/checkout")}
-                >
+                <StyledButton onClick={() => navigate("/checkout")}>
                   Checkout
                 </StyledButton>
               </ButtonContainer>
@@ -124,7 +108,7 @@ const Background = styled.div`
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.0)
+      rgba(0, 0, 0, 0)
     ),
     url("rhinos.jpg");
   background-size: cover;
@@ -153,7 +137,6 @@ const CartWrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* padding: 5px; */
   }
 `;
 
@@ -164,7 +147,6 @@ const CartItems = styled.div`
   margin-left: 3rem;
   h2 {
     margin: 1rem;
-    /*   margin-left: 1rem; */
   }
   hr {
     width: 100%;
@@ -228,7 +210,6 @@ const CartSummary = styled.div`
   margin-right: 4rem;
   h2 {
     margin: 1rem;
-    /*   margin-left: 1rem; */
   }
   hr {
     width: 100%;
@@ -292,19 +273,19 @@ const StyledButton = styled.button`
 `;
 
 const AmountButton = styled.button`
-  background-color: /* #F4EDE6 *//* #efebe8 */ #595959;
+  background-color: #595959;
   color: white;
   padding: 0.5rem 1rem;
   cursor: pointer;
- border-radius: 5px;
- border: none;
+  border-radius: 5px;
+  border: none;
   width: 50px;
   transition:
     background-color 0.3s,
     color 0.3s;
 
-    &:hover {
-        background-color: rgba(89, 89, 89, 0.9);
-        color: white;
-      }
+  &:hover {
+    background-color: rgba(89, 89, 89, 0.9);
+    color: white;
+  }
 `;

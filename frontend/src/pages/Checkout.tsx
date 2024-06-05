@@ -5,11 +5,13 @@ import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Interface form error text
 interface ErrorTextProps {
   visible: boolean;
 }
 
 const Checkout = () => {
+  // Use cart for context functionality.
   const { cartQuantity, cartItems, clearCart } = useCart();
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Checkout = () => {
     (total, item) => total + item.price * item.quantity,
     0,
   );
-
+  // Form validation
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -32,6 +34,7 @@ const Checkout = () => {
       .max(12, "Phone must be at most 12 characters"),
   });
 
+  // Initializing formik to handle form submission.
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,6 +43,7 @@ const Checkout = () => {
       phone: "",
     },
     validationSchema: validationSchema,
+    // Handle submit.
     onSubmit: async (values) => {
       try {
         const orderData = {
@@ -54,7 +58,7 @@ const Checkout = () => {
             date: item.date,
           })),
         };
-
+        // POST request to server
         const response = await axios.post(
           "http://localhost:3000/orders",
           orderData,
@@ -62,10 +66,13 @@ const Checkout = () => {
 
         console.log("Order placed successfully:", response.data);
         console.log("Order data:", orderData);
-
+        // Reset form.
         formik.resetForm();
+        // Clear the cart.
         clearCart();
+        // Navigate to confirmation page.
         navigate("/confirmation");
+        // Catch erros.
       } catch (error) {
         console.error("Error handling form submission:", error);
       }
@@ -240,7 +247,6 @@ const OrderSummary = styled.div`
   }
   h2 {
     margin: 1rem;
-    /*   margin-left: 1rem; */
   }
   hr {
     width: 100%;
@@ -297,7 +303,6 @@ const StyledInput = styled.input`
   height: 40px;
   border: none;
   border-radius: 5px;
-  /* border: 1px solid grey; */
   color: black;
   margin: 0.5rem;
   padding: 8px;
@@ -306,13 +311,12 @@ const StyledInput = styled.input`
   outline: none;
 
   &::placeholder {
-    color: #000000; /* Kolsvart färg för placeholders */
-    opacity: 1; /* För att säkerställa att färgen är stark */
+    color: #000000;
+    opacity: 1;
   }
 
   &:focus {
     border: 1px solid #c02b0a;
-    /* box-shadow: 0 0 5px #C02B0A; */
   }
 
   /* WebKit specific styles for autofill */
@@ -333,7 +337,6 @@ const ErrorText = styled.div<ErrorTextProps>`
   color: #c02b0a;
   font-size: 0.875em;
   margin-left: 0.5rem;
-
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `;
 

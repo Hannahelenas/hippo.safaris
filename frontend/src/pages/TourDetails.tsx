@@ -5,17 +5,11 @@ import { useParams } from "react-router-dom";
 import TourDetailsHero from "../components/TourDetailsHero";
 import styled from "styled-components";
 import CustomCalendarHeader from "../components/CalendarHeader";
-/* import { Button } from "@mui/material"; */
 import { useCart } from "../context/CartContext";
-/* import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'; */
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { useNavigate } from "react-router-dom";
-/* import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"; */
-/* import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'; */
 import TourDetailsIntro from "../components/TourDetailsIntro";
-
-
 
 interface Safari {
   id: number;
@@ -27,21 +21,28 @@ interface Safari {
   country: string;
 }
 
+// Calendar date configuration to set todays date.
 const today: dayjs.Dayjs = dayjs();
 
 const TourDetails = () => {
+  // State to handle safari data.
   const [safari, setSafari] = useState<Safari | null>(null);
+  // Get id from url param.
   const { id } = useParams<{ id: string }>();
+  // State to handle value in calendar
   const [value, setValue] = React.useState<Dayjs | null>(today);
+
   const navigate = useNavigate();
 
-  console.log("useParams:", useParams());
-  console.log(`Fetching data for safariId: ${id}`);
+  /* console.log("useParams:", useParams());
+  console.log(`Fetching data for safariId: ${id}`); */
 
+// Use cart to handle cart functionality.
   const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } =
     useCart();
   const quantity = id ? getItemQuantity(parseInt(id)) : 0;
 
+  // Get the specific safari based on id in param.
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
@@ -71,29 +72,27 @@ const TourDetails = () => {
     <div>
       {safari ? (
         <div>
+            {/* Hero component */}
           <TourDetailsHero
             image={safari.image}
             name={safari.name}
             country={safari.country}
             category={safari.category}
           />
-          {/* <div>{safari.id}</div> */}
-           <TourDetailsIntro image={safari.image} description={safari.description} price={safari.price} country={safari.country}/>
+          {/* Intro component */}
+          <TourDetailsIntro
+            image={safari.image}
+            description={safari.description}
+            price={safari.price}
+            country={safari.country}
+          />
           <TourInfoWrapper>
-            {/* <PageIntro>
-              <h2>Description</h2>
-              <hr />
-              <p>{safari.description}</p>
-              <p>Price{safari.price}$ per person</p>
-              <p>{safari.name}</p>
-
-              <p>Destination {safari.country}</p>
-              <p>Category {safari.category}</p>
-            </PageIntro> */}
+            {/* Booking component */}
             <BookingWrapper>
               <h2>Plan your trip</h2>
               <hr />
               <ContentCenter>
+                {/* Calendar picker component */}
                 <StyledStaticDatePicker
                   value={value}
                   onChange={(newValue: Dayjs | null) => setValue(newValue)}
@@ -117,7 +116,6 @@ const TourDetails = () => {
                   </p>
                 </SelectedDateContainer>
                 <hr />
-                {/* Buttons start */}
                 <ButtonGroup>
                   {quantity === 0 ? (
                     <AddButtonContainer>
@@ -134,7 +132,6 @@ const TourDetails = () => {
                         }
                       >
                         Add tickets
-                      {/*   <KeyboardArrowDownIcon /> */}
                       </AddButton>
                     </AddButtonContainer>
                   ) : (
@@ -163,7 +160,7 @@ const TourDetails = () => {
                       </ParticipantInput>
                       <BottomButtonContainer>
                         <AddButton onClick={() => navigate("/cart")}>
-                          Continue{/* <KeyboardArrowRightIcon /> */}
+                          Continue
                         </AddButton>
                       </BottomButtonContainer>
                     </div>
@@ -205,32 +202,9 @@ const TourInfoWrapper = styled.div`
   box-sizing: border-box !important;
   @media (max-width: 768px) {
     justify-content: center;
-  align-items: center;
+    align-items: center;
   }
 `;
-
-/* const PageIntro = styled.div`
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 3rem;
-
-  h2 {
-    font-size: 32px;
-  }
-  hr {
-    width: 100%;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1rem 0;
-  }
-  @media (max-width: 768px) {
-    width: 90vw;
-  }
-`; */
 
 const BookingWrapper = styled.div`
   background-color: white;
@@ -247,7 +221,6 @@ const BookingWrapper = styled.div`
     font-size: 32px;
     margin-left: 1rem;
     margin-top: 0.5rem;
-
   }
   hr {
     width: 100%;
@@ -297,8 +270,8 @@ const BottomButtonContainer = styled.div`
 
 const StyledStaticDatePicker = styled(StaticDatePicker)({
   "& .MuiTypography-root": {
-    fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
-},
+    fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
+  },
   ".MuiDateCalendar-root": {
     color: "#000000",
     borderRadius: "5px",
@@ -308,7 +281,7 @@ const StyledStaticDatePicker = styled(StaticDatePicker)({
     color: "black",
     borderRadius: "1px",
     backgroundColor: "#efebe8",
-    fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
+    fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
   },
   ".MuiPickersDay-root:hover": {
     color: "black",
@@ -368,7 +341,7 @@ const AddButton = styled.button`
   align-items: center;
   padding: 0.8rem 2rem;
   border-radius: 40px;
-  font-family:  "Lora", "Nunito Sans", "Roboto", "Oxygen";
+  font-family: "Lora", "Nunito Sans", "Roboto", "Oxygen";
   text-transform: none;
   font-size: 17px;
   font-weight: 500;
@@ -378,11 +351,10 @@ const AddButton = styled.button`
   transition:
     background-color 0.3s,
     color 0.3s;
-     &:hover {
-      background-color: #595959;
-      color: white;
-    }
-
+  &:hover {
+    background-color: #595959;
+    color: white;
+  }
 `;
 
 const AmountButton = styled.button`
@@ -390,16 +362,16 @@ const AmountButton = styled.button`
   color: black;
   padding: 0.5rem 1rem;
   cursor: pointer;
- border-radius: 5px;
- border: none;
- font-size: 17px;
+  border-radius: 5px;
+  border: none;
+  font-size: 17px;
   width: 50px;
   transition:
     background-color 0.3s,
     color 0.3s;
 
-    &:hover {
-        background-color: #dcd6d2;
-        color: black;
-      }
+  &:hover {
+    background-color: #dcd6d2;
+    color: black;
+  }
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// Interface for props
 interface HeroProps {
     image: string;
     name: string;
@@ -15,7 +16,7 @@ const Hero = styled.div<HeroProps>`
     background:
         linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 50%),
         linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 50%),
-        url(${(props) => props.image});
+        url(${(props) => props.image}); /* Setting the image dynamically depending on the image string value.*/
     background-size: cover;
     background-position: center;
     z-index: 0;

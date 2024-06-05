@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
-interface ButtonProps {
+// Interface for the button.
+interface FilterButtonProps {
   text: string;
   onClick: () => void;
   selected: boolean;
 }
 
 const CustomFilterButton = styled.button<{ selected: boolean }>`
+/* Setting the background color based on the selected state. */
   background-color: ${(props) => (props.selected ? "#595959" : "#efebe8")};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Setting the color based on the selected state. */
   color: ${(props) => (props.selected ? "white" : "black")};
   padding: 0.8rem 2rem;
   border-radius: 40px;
@@ -27,7 +30,7 @@ const CustomFilterButton = styled.button<{ selected: boolean }>`
   }
 `;
 
-const FilterButton: React.FC<ButtonProps> = ({ text, onClick, selected }) => {
+const FilterButton: React.FC<FilterButtonProps> = ({ text, onClick, selected }) => {
   return (
     <CustomFilterButton onClick={onClick} selected={selected}>
       {text}

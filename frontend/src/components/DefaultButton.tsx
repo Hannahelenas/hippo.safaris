@@ -3,9 +3,7 @@ import styled from "styled-components";
 interface ButtonProps {
   text: string;
   onClick: () => void;
- /*  selected: boolean; */
 }
-
 
 const DefaultButton: React.FC<ButtonProps> = ({ text, onClick }) => {
   return <StyledDefaultButton onClick={onClick}>{text}</StyledDefaultButton >;

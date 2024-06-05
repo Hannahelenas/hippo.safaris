@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import ContactIntro from "../components/ContactIntro";
-/* import ContactForm from "../components/ContactForm"; */
 import FormSection from "../components/FormSection";
 
 const Contact = () => {
@@ -12,7 +11,6 @@ const Contact = () => {
         </TitleContainer>
       </Hero>
       <ContactIntro />
-      {/* <ContactForm /> */}
       <FormSection />
     </>
   );
@@ -44,7 +42,6 @@ const Title = styled.h1`
   text-align: center;
   color: white;
   font-size: 44px;
-  /* font-weight: 400; */
   margin-bottom: 5rem;
 `;
 const TitleContainer = styled.div`

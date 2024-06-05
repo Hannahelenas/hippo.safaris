@@ -41,7 +41,7 @@ const ContactWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: /* #efebe8 */ #f9f6f3;
+  background-color: #f9f6f3;
 `;
 
 const ContactDetails = styled.div`
@@ -51,9 +51,7 @@ const ContactDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-  /* margin-top: 3rem; */
   h2 {
-    /* margin-top: 3rem; */
     font-size: 32px;
   }
   hr {

@@ -189,7 +189,7 @@ app.post("/orders", async (req: Request, res: Response) => {
     }
 
     // Validation for name and lastname.
-    const nameRegex = /^[a-zA-ZåäöÅÄÖ-]+$/;
+    const nameRegex = /^[a-zA-Z\s]+$/u;
 
     if (!nameRegex.test(name)) {
       return res
@@ -259,28 +259,28 @@ app.post("/messages", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Validation for email format.
+     // Validation for email format.
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: "Invalid email format" });
     }
 
     // Validation name format.
-    const nameRegex = /^[a-zA-ZåäöÅÄÖ-]+$/;
+    const nameRegex = /^[a-zA-Z\s]+$/u;
     if (!nameRegex.test(name)) {
       return res
         .status(400)
-        .json({ error: "Name must contain only letters and hyphens" });
+        .json({ error: "Name must contain only letters" });
     }
 
-    // Validation for phone number format.
+   // Validation for phone number format.
     const phoneRegex = /^\d{10,12}$/;
     if (!phoneRegex.test(phone)) {
       return res.status(400).json({ error: "Invalid phone number format" });
     }
 
-    // Validation for message format.
-    const messageRegex = /^[a-zA-Z0-9.,!?&\s\n\r]{20,1000}$/;
+   // Validation for message format.
+     const messageRegex = /^[^\n\r\S]*(?:[a-zA-Z0-9.,!? åäöÅÄÖ\n\r\t]{20,1000})[^\n\r\S]*$/;
     if (!messageRegex.test(message)) {
       return res.status(400).json({ error: "Invalid message format" });
     }
