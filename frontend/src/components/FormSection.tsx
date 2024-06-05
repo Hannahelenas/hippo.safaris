@@ -15,9 +15,18 @@ const FormSection = () => {
       .string()
       .email("Enter a valid email")
       .required("Email is required"),
-    name: yup.string().required("Name is required"),
-    phone: yup.string().required("Phone is required"),
-    message: yup.string().required("Message is required"),
+    name: yup.string().required("Name is required")
+    .min(2, "Name must be at least two characters"),
+    phone: yup
+      .string()
+      .required("Phone is required")
+      .min(10, "Phone must be at least 10 characters")
+      .max(12, "Phone must be at most 12 characters"),
+    message: yup
+      .string()
+      .required("Message is required")
+      .min(20, "Message must be at least 20 characters")
+      .max(1000, "Message must be at most 1000 characters"),
   });
 
   const formik = useFormik({
@@ -160,8 +169,8 @@ const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: none; /* Ta bort bakgrundsfärgen */
-  color: white; /* Gör texten vit så att den syns mot bakgrunden */
+  background: none;
+  color: white;
   h2 {
     font-size: 32px;
   }
@@ -213,8 +222,9 @@ const StyledTextarea = styled.textarea`
 
 const ErrorText = styled.div<ErrorTextProps>`
   color: white;
-  font-size: 0.875em;
+  font-size: 14px;
   margin-left: 0.5rem;
+  font-weight: 600;
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `;
 
