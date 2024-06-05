@@ -149,6 +149,30 @@ app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
+// Endpoint for posting messages
+app.post('/messages', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // Extracting data from post request
+        const { email, name, phone, message } = req.body;
+        // Validation of input data
+        if (!email || !name || !phone || !message) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+        // Add the new message to database
+        const result = yield database.run(`
+            INSERT INTO messages (email, name, phone, message)
+            VALUES (?, ?, ?, ?)
+        `, [email, name, phone, message]);
+        res.status(201).json({
+            message: 'Message received',
+            messageId: result.lastID,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servern lyssnar på port ${PORT}`);

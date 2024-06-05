@@ -121,10 +121,10 @@ const Background = styled.div`
   position: relative;
   background: linear-gradient(
       to bottom,
+      rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0)
+      rgba(0, 0, 0, 0.0)
     ),
     url("rhinos.jpg");
   background-size: cover;

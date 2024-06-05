@@ -11,6 +11,10 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import { PickersCalendarHeaderProps } from "@mui/x-date-pickers/PickersCalendarHeader";
 
 const CustomCalendarHeaderRoot = styled("div")({
+    "& .MuiTypography-root": {
+        fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
+        fontSize: "16px",
+    },
   display: "flex",
   justifyContent: "space-between",
   padding: "8px 16px",

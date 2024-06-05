@@ -15,7 +15,7 @@ const ContactIntro = () => {
           </IntroParagraph>
           <p>
             <strong>Address:</strong> Hippo Safaris Ltd, Savannah Road 123
-            Johannesburg, 2001, ZA
+            Big Tree, 2001, ZA
           </p>
           <p>
             <strong>Email Address:</strong> info@hipposafaris.co.za

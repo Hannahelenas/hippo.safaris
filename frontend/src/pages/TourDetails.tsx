@@ -11,9 +11,10 @@ import { useCart } from "../context/CartContext";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { useNavigate } from "react-router-dom";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+/* import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"; */
+/* import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'; */
 import TourDetailsIntro from "../components/TourDetailsIntro";
+
 
 
 interface Safari {
@@ -133,7 +134,7 @@ const TourDetails = () => {
                         }
                       >
                         Add tickets
-                        <KeyboardArrowDownIcon />
+                      {/*   <KeyboardArrowDownIcon /> */}
                       </AddButton>
                     </AddButtonContainer>
                   ) : (
@@ -162,7 +163,7 @@ const TourDetails = () => {
                       </ParticipantInput>
                       <BottomButtonContainer>
                         <AddButton onClick={() => navigate("/cart")}>
-                          Continue<KeyboardArrowRightIcon />
+                          Continue{/* <KeyboardArrowRightIcon /> */}
                         </AddButton>
                       </BottomButtonContainer>
                     </div>
@@ -295,8 +296,9 @@ const BottomButtonContainer = styled.div`
 `;
 
 const StyledStaticDatePicker = styled(StaticDatePicker)({
-  /* marginTop: "1rem", */
-  fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
+  "& .MuiTypography-root": {
+    fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
+},
   ".MuiDateCalendar-root": {
     color: "#000000",
     borderRadius: "5px",
@@ -305,18 +307,18 @@ const StyledStaticDatePicker = styled(StaticDatePicker)({
   ".MuiPickersDay-root": {
     color: "black",
     borderRadius: "1px",
-    backgroundColor: "#F4EDE6",
+    backgroundColor: "#efebe8",
+    fontFamily:"'Nunito Sans', 'Roboto', 'Oxygen', sans-serif !important",
   },
   ".MuiPickersDay-root:hover": {
     color: "black",
     borderRadius: "1px",
-    backgroundColor: "#F4EDE6",
-    fontWeight: "bold",
+    backgroundColor: " #dcd6d2",
   },
   ".MuiPickersDay-today": {
     color: "black",
     borderRadius: "1px",
-    backgroundColor: "#F4EDE6",
+    backgroundColor: "#efebe8",
     border: "none !important",
     fontWeight: "bold",
   },
@@ -339,7 +341,6 @@ const StyledStaticDatePicker = styled(StaticDatePicker)({
 });
 
 const SelectedDateContainer = styled.div`
-    /* background-color: #F9F6F3; */
     width: 90%;
     height 10rem;
     padding-top: 0.5rem;
@@ -360,20 +361,6 @@ const ButtonGroup = styled.div`
 `;
 
 const AddButton = styled.button`
- /*  background-color: #5f6453;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  padding: 0.8rem 2.5rem;
-  font-weight: bold;
-  border-radius: 40px;
-  font-family: "Nunito Sans", "Roboto", "Oxygen";
-  text-transform: none;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 1rem; */
-
   background-color: #efebe8;
   color: #000000;
   display: flex;
@@ -381,7 +368,7 @@ const AddButton = styled.button`
   align-items: center;
   padding: 0.8rem 2rem;
   border-radius: 40px;
-  font-family: "Nunito Sans", "Roboto", "Oxygen";
+  font-family:  "Lora", "Nunito Sans", "Roboto", "Oxygen";
   text-transform: none;
   font-size: 17px;
   font-weight: 500;
@@ -391,34 +378,28 @@ const AddButton = styled.button`
   transition:
     background-color 0.3s,
     color 0.3s;
- /*  &:hover {
-    background-color: #F9F6F3;
-    color: #000000;
-  } */
-
-  svg {
-    margin-left: 0.5rem;
-  }
+     &:hover {
+      background-color: #595959;
+      color: white;
+    }
 
 `;
 
 const AmountButton = styled.button`
-  background-color: #F4EDE6;
+  background-color: #efebe8;
   color: black;
   padding: 0.5rem 1rem;
   cursor: pointer;
  border-radius: 5px;
  border: none;
+ font-size: 17px;
   width: 50px;
   transition:
     background-color 0.3s,
     color 0.3s;
 
-  &:hover {
-    background-color: rgba(244, 237, 230, 0.9);
-  }
-
-  &:active {
-    background-color: rgba(244, 237, 230, 0.9);
-  }
+    &:hover {
+        background-color: #dcd6d2;
+        color: black;
+      }
 `;

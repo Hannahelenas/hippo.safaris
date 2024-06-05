@@ -1,20 +1,35 @@
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useState } from "react";
+import axios from "axios";
 
 interface ErrorTextProps {
   visible: boolean;
 }
 
 const FormSection = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const validationSchema = yup.object({
     email: yup
       .string()
       .email("Enter a valid email")
       .required("Email is required"),
-    name: yup.string().required("Name is required"),
-    phone: yup.string().required("Phone is required"),
-    message: yup.string().required("Message is required"),
+    name: yup
+      .string()
+      .required("Name is required")
+      .min(2, "Name must be at least two characters"),
+    phone: yup
+      .string()
+      .required("Phone is required")
+      .min(10, "Phone must be at least 10 characters")
+      .max(12, "Phone must be at most 12 characters"),
+    message: yup
+      .string()
+      .required("Message is required")
+      .min(20, "Message must be at least 20 characters")
+      .max(1000, "Message must be at most 1000 characters"),
   });
 
   const formik = useFormik({
@@ -33,8 +48,15 @@ const FormSection = () => {
           phone: values.phone,
           message: values.message,
         };
-        console.log("Message data:", messageData);
 
+        const response = await axios.post(
+          "http://localhost:3000/messages",
+          messageData,
+        );
+
+        console.log("Message data:", messageData);
+        console.log(response.data);
+        setFormSubmitted(true);
         formik.resetForm();
       } catch (error) {
         console.error("Error handling form submission:", error);
@@ -111,14 +133,15 @@ const FormSection = () => {
           <ButtonWrapper>
             <StyledButton
               type="submit"
-              /* variant="contained" */
-              /* disableElevation */
               disabled={!formik.isValid || !formik.dirty}
             >
               Send
             </StyledButton>
           </ButtonWrapper>
         </Form>
+        {formSubmitted && (
+          <p><strong>Thank you for your message! We will reach out to you soon.</strong></p>
+        )}
       </FormWrapper>
     </Wrapper>
   );
@@ -156,8 +179,8 @@ const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: none; /* Ta bort bakgrundsfärgen */
-  color: white; /* Gör texten vit så att den syns mot bakgrunden */
+  background: none;
+  color: white;
   h2 {
     font-size: 32px;
   }
@@ -209,8 +232,9 @@ const StyledTextarea = styled.textarea`
 
 const ErrorText = styled.div<ErrorTextProps>`
   color: white;
-  font-size: 0.875em;
+  font-size: 14px;
   margin-left: 0.5rem;
+  font-weight: 600;
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `;
 

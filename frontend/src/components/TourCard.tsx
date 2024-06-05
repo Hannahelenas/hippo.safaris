@@ -46,7 +46,7 @@ const OverlayContent = styled('div')({
 
 })
 
-const Banner = styled('div')({
+/* const Banner = styled('div')({
     position: 'absolute',
     top: 0,
     left: 0,
@@ -58,7 +58,7 @@ const Banner = styled('div')({
     fontSize: '14px',
     fontWeight: 'bold',
     zIndex: 1,
-});
+}); */
 
 const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => {
     return (
@@ -69,7 +69,7 @@ const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => 
         >
             <CardActionArea>
                 <Box sx={{ position: 'relative' }}>
-                <Banner>New</Banner>
+                {/* <Banner>New</Banner> */}
                     <CardMedia
                         component="img"
                         height="410"
@@ -78,7 +78,7 @@ const TourCard:  React.FC<TourCardProps> = ({ name, price, image, country }) => 
                     />
                     <Overlay>
                         <OverlayContent>
-                        <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
+                        <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: "'Lora', 'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
                         {name}
                         </Typography>
                         <Typography variant="body2" component="div" sx={{ fontFamily: "'Nunito Sans', 'Roboto', 'Oxygen' !important" }}>
