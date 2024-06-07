@@ -51,10 +51,10 @@ const Tours = () => {
   // Get safaris depending on category.
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data for category:", category);
+      /* console.log("Fetching data for category:", category);
       let url = "http://localhost:3000/safaris";
       if (category !== "all") {
-        url = `http://localhost:3000/${category}`; 
+        url = `http://localhost:3000/${category}`;
       }
       try {
         const response = await axios.get<Safari[]>(url);
@@ -63,7 +63,21 @@ const Tours = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
+    }; */
+    console.log("Fetching data for category:", category);
+    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
+    let url = `${baseUrl}/safaris`;
+    if (category !== "all") {
+      url = `${baseUrl}/${category}`;
+    }
+    try {
+      const response = await axios.get<Safari[]>(url);
+      console.log("Data fetched:", response.data);
+      setSafaris(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
     fetchData();
   }, [category]);
