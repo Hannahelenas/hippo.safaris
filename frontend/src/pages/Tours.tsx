@@ -48,13 +48,13 @@ const Tours = () => {
   // State to handle category.
   const [category, setCategory] = useState<string>("all");
 
-  // Get safaris depending on category. 
+  // Get safaris depending on category.
   useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching data for category:", category);
       let url = "http://localhost:3000/safaris";
       if (category !== "all") {
-        url = `http://localhost:3000/${category}`;
+        url = `http://localhost:3000/${category}`; 
       }
       try {
         const response = await axios.get<Safari[]>(url);

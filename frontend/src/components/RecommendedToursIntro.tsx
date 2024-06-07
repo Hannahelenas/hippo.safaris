@@ -49,11 +49,16 @@ const RecommendedToursIntro = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+        const baseUrl =  process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
       try {
         // Get request to to server.
-        const response = await axios.get<Safari[]>(
+        /* const response = await axios.get<Safari[]>(
           "http://localhost:3000/classic",
+        ); */
+        const response = await axios.get<Safari[]>(
+          `${baseUrl}/classic`,
         );
+
         setSafaris(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
