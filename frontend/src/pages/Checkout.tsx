@@ -59,8 +59,12 @@ const Checkout = () => {
           })),
         };
         // POST request to server
-        const response = await axios.post(
+        /* const response = await axios.post(
           "http://localhost:3000/orders",
+          orderData,
+        ); */
+        const response = await axios.post(
+          "https://hippo-safaris.onrender.com/orders",
           orderData,
         );
 
