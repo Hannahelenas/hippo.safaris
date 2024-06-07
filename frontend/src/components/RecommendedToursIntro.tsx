@@ -49,12 +49,13 @@ const RecommendedToursIntro = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        const baseUrl =  process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
+        const baseUrl = "https://hippo-safaris.onrender.com" /* process.env.REACT_APP_API_BASE_URL || "http://localhost:3000"; */
       try {
         // Get request to to server.
         /* const response = await axios.get<Safari[]>(
           "http://localhost:3000/classic",
         ); */
+        console.log(baseUrl)
         const response = await axios.get<Safari[]>(
           `${baseUrl}/classic`,
         );

@@ -65,7 +65,7 @@ const Tours = () => {
       }
     }; */
     console.log("Fetching data for category:", category);
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
+    const baseUrl = "https://hippo-safaris.onrender.com" /* process.env.REACT_APP_API_BASE_URL || "http://localhost:3000"; */
     let url = `${baseUrl}/safaris`;
     if (category !== "all") {
       url = `${baseUrl}/${category}`;
