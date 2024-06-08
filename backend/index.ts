@@ -61,7 +61,12 @@ const app = express();
 app.use(express.static(path.join(path.resolve(), "dist")));
 
 // Enable Cross-Origin Resource Sharing (CORS) to allow requests from different origins.
-app.use(cors());
+/* app.use(cors()); */
+app.use(cors({
+    origin: 'https://hippo-safaris.onrender.com',
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type'
+  }));
 
 // Parse incoming requests with JSON payloads, handle JSON data in POST requests.
 app.use(bodyParser.json());
