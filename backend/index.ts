@@ -253,7 +253,7 @@ app.post("/messages", async (req: Request, res: Response) => {
   try {
     // Extracting data from post request body.
     const { email, name, phone, message }: Message = req.body;
-
+/*
     // Validation of input data.
     if (!email || !name || !phone || !message) {
       return res.status(400).json({ error: "All fields are required" });
@@ -283,7 +283,7 @@ app.post("/messages", async (req: Request, res: Response) => {
      const messageRegex = /^[^\n\r\S]*(?:[a-zA-Z0-9.,!? åäöÅÄÖ\n\r\t]{20,1000})[^\n\r\S]*$/;
     if (!messageRegex.test(message)) {
       return res.status(400).json({ error: "Invalid message format" });
-    }
+    } */
 
     // Add the new message to database table messages.
     const result = await database.run(
@@ -293,6 +293,7 @@ app.post("/messages", async (req: Request, res: Response) => {
         `,
       [email, name, phone, message],
     );
+    console.log("Database insert result:", result);
 
     res.status(201).json({
       message: "Message received",
