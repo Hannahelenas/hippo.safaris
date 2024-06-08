@@ -6,6 +6,7 @@ import cors from "cors";
 import path from "path";
 import bodyParser from "body-parser";
 import express from "express";
+import { Message } from "@mui/icons-material";
 
 // Interfaces
 interface Safari {
@@ -254,6 +255,7 @@ app.post("/messages", async (req: Request, res: Response) => {
     // Extracting data from post request body.
     const { email, name, phone, message }: Message = req.body;
     console.log(req.body)
+    console.log(email, name, phone, message)
 /*
     // Validation of input data.
     if (!email || !name || !phone || !message) {
