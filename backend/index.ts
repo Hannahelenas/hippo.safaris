@@ -295,6 +295,13 @@ app.post("/messages", async (req: Request, res: Response) => {
     );
     console.log("Database insert result:", result);
 
+    // Testing a select to see the message
+    const insertedMessage = await database.get(
+        `SELECT * FROM messages WHERE id = ?`,
+        [result.lastID],
+      );
+      console.log("Inserted message:", insertedMessage);
+
     res.status(201).json({
       message: "Message received",
       messageId: result.lastID,
