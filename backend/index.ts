@@ -253,6 +253,7 @@ app.post("/messages", async (req: Request, res: Response) => {
   try {
     // Extracting data from post request body.
     const { email, name, phone, message }: Message = req.body;
+    console.log(req.body)
 /*
     // Validation of input data.
     if (!email || !name || !phone || !message) {
