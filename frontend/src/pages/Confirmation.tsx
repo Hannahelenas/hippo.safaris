@@ -26,7 +26,7 @@ const Background = styled.div`
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url("rhinos.jpg");
+    url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
   background-size: cover;
   background-position: center;
   z-index: 0;
