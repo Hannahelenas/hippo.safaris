@@ -58,7 +58,7 @@ const Cart: React.FC = () => {
                         </ButtonGroup>
                       </Participants>
                       <p>
-                        Product total:
+                        Product total: 
                         {item.price * item.quantity}$
                       </p>
                     </ItemDetails>

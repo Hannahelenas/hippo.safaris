@@ -7,10 +7,10 @@ const Hero = styled.div`
   position: relative;
   background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0)
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
     ),
     url("andrew-liu-EunFGVJLPmQ-unsplash.jpg");
 

@@ -55,14 +55,14 @@ const FormSection = () => {
           message: values.message,
         };
         // Send post request to server.
-        /* const response = await axios.post(
+         const response = await axios.post(
           "http://localhost:3000/messages",
           messageData,
-        ); */
-        const response = await axios.post(
+        );
+        /* const response = await axios.post(
           "https://hippo-safaris.onrender.com/messages",
           messageData,
-        );
+        ); */
 
         console.log("Message data:", messageData);
         console.log(response.data);

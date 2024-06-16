@@ -4,17 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 const Hero = styled.div`
   margin-top: 0;
-  height: 95vh;
+  height: 100vh;
   width: 100vw;
   position: relative;
   background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.5),
+      /* rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0)
+      rgba(0, 0, 0, 0) */
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
     ),
-   /*  url("giraffs.jpg"); */
+     url("ian-mackey-k4SsdTVznyE-unsplash.jpg");
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -22,7 +26,7 @@ const Hero = styled.div`
   overflow: hidden;
   box-sizing: border-box !important;
 `;
-const VideoBackground = styled.video`
+/* const VideoBackground = styled.video`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -43,14 +47,18 @@ const GradientOverlay = styled.div`
     rgba(0, 0, 0, 0.2),
     rgba(0, 0, 0, 0)
   );
-`;
+`; */
 const Title = styled.h1`
   text-align: center;
   color: white;
   font-size: 44px;
   position: relative;
   z-index: 1;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    margin-bottom: 10rem;
+  }
+
 `;
 const TitleContainer = styled.div`
   margin-top: 35vh;
@@ -62,20 +70,25 @@ const TitleContainer = styled.div`
   position: relative;
 `;
 
+/* const ButtonContainer = styled.div`
+margin-top: 22vh;` */
+
 const HomeHero = () => {
   // Using useNavigate hook for button navigation
   const navigate = useNavigate();
   return (
     <Hero>
-      <VideoBackground autoPlay loop muted>
+      {/* <VideoBackground autoPlay loop muted>
         <source src="5220243-hd_1920_1080_25fps.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
-      <GradientOverlay />
+      <GradientOverlay /> */}
       <TitleContainer>
-        <Title>Safaris in Africas most beautiful landscape</Title>
+        <Title>Safaris in Africa's most beautiful landscape</Title>
+        {/* <ButtonContainer> */}
         <DefaultButton text={"Book now"} onClick={() => navigate("/tours")} />
-      </TitleContainer>
+        {/* </ButtonContainer> */}
+     </TitleContainer>
     </Hero>
   );
 };

@@ -56,7 +56,12 @@ const app = (0, express_1.default)();
 // Serve static files from the "dist" directory.
 app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "dist")));
 // Enable Cross-Origin Resource Sharing (CORS) to allow requests from different origins.
-app.use((0, cors_1.default)());
+/* app.use(cors()); */
+app.use((0, cors_1.default)({
+    origin: 'https://hippo-safaris.onrender.com',
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type'
+}));
 // Parse incoming requests with JSON payloads, handle JSON data in POST requests.
 app.use(body_parser_1.default.json());
 // Parse incoming requests with URL-encoded payloads, handle form submissions.
@@ -205,37 +210,48 @@ app.post("/messages", (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         // Extracting data from post request body.
         const { email, name, phone, message } = req.body;
-        // Validation of input data.
-        if (!email || !name || !phone || !message) {
-            return res.status(400).json({ error: "All fields are required" });
-        }
-        // Validation for email format.
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({ error: "Invalid email format" });
-        }
-        // Validation name format.
-        const nameRegex = /^[a-zA-Z\s]+$/u;
-        if (!nameRegex.test(name)) {
-            return res
+        console.log(req.body);
+        console.log(email, name, phone, message);
+        /*
+            // Validation of input data.
+            if (!email || !name || !phone || !message) {
+              return res.status(400).json({ error: "All fields are required" });
+            }
+        
+             // Validation for email format.
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              return res.status(400).json({ error: "Invalid email format" });
+            }
+        
+            // Validation name format.
+            const nameRegex = /^[a-zA-Z\s]+$/u;
+            if (!nameRegex.test(name)) {
+              return res
                 .status(400)
                 .json({ error: "Name must contain only letters" });
-        }
-        // Validation for phone number format.
-        const phoneRegex = /^\d{10,12}$/;
-        if (!phoneRegex.test(phone)) {
-            return res.status(400).json({ error: "Invalid phone number format" });
-        }
-        // Validation for message format.
-        const messageRegex = /^[^\n\r\S]*(?:[a-zA-Z0-9.,!? åäöÅÄÖ\n\r\t]{20,1000})[^\n\r\S]*$/;
-        if (!messageRegex.test(message)) {
-            return res.status(400).json({ error: "Invalid message format" });
-        }
+            }
+        
+           // Validation for phone number format.
+            const phoneRegex = /^\d{10,12}$/;
+            if (!phoneRegex.test(phone)) {
+              return res.status(400).json({ error: "Invalid phone number format" });
+            }
+        
+           // Validation for message format.
+             const messageRegex = /^[^\n\r\S]*(?:[a-zA-Z0-9.,!? åäöÅÄÖ\n\r\t]{20,1000})[^\n\r\S]*$/;
+            if (!messageRegex.test(message)) {
+              return res.status(400).json({ error: "Invalid message format" });
+            } */
         // Add the new message to database table messages.
         const result = yield database.run(`
             INSERT INTO messages (email, name, phone, message)
             VALUES (?, ?, ?, ?)
         `, [email, name, phone, message]);
+        console.log("Database insert result:", result);
+        // Testing a select to see the message
+        const insertedMessage = yield database.get(`SELECT * FROM messages WHERE id = ?`, [result.lastID]);
+        console.log("Inserted message:", insertedMessage);
         res.status(201).json({
             message: "Message received",
             messageId: result.lastID,

@@ -52,8 +52,8 @@ const TourDetails = () => {
 
       try {
          const response = await axios.get<Safari[]>(
-          /* `http://localhost:3000/safaris/${id}`, */
-          `https://hippo-safaris.onrender.com/safaris/${id}`,
+           `http://localhost:3000/safaris/${id}`,
+         /*  `https://hippo-safaris.onrender.com/safaris/${id}`, */
         );
 
         if (response.data.length > 0) {
