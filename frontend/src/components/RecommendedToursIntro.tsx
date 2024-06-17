@@ -57,7 +57,7 @@ const RecommendedToursIntro = () => {
         ); */
         console.log(baseUrl)
         const response = await axios.get<Safari[]>(
-          `${baseUrl}/classic`,
+          `${baseUrl}/premium`,
         );
 
         setSafaris(response.data);
