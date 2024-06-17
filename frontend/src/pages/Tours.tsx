@@ -51,7 +51,7 @@ const Tours = () => {
   // Get safaris depending on category.
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data for category:", category);
+    /*   console.log("Fetching data for category:", category);
       let url = "http://localhost:3000/safaris";
       if (category !== "all") {
         url = `http://localhost:3000/${category}`;
@@ -63,8 +63,8 @@ const Tours = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
-/*     console.log("Fetching data for category:", category);
+    }; */
+   console.log("Fetching data for category:", category);
     const baseUrl = "https://hippo-safaris.onrender.com"
     let url = `${baseUrl}/safaris`;
     if (category !== "all") {
@@ -77,7 +77,7 @@ const Tours = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }; */
+  };
 
     fetchData();
   }, [category]);
